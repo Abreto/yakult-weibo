@@ -7,6 +7,7 @@
     "client:dev": "cd client && yarn start",
     "client:build": "cd client && yarn build",
     "server:dev": "node server.js",
+    "build": "yarn client:build",
     "test": "yarn lint",
     "lint": "eslint . --fix",
     "start": "NODE_ENV=\"production\" node server",
