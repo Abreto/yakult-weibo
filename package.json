@@ -4,9 +4,11 @@
   "description": "A Weibo inspired by yakult",
   "main": "server.js",
   "scripts": {
-    "server": "node server.js",
+    "client:build": "cd client && yarn build",
+    "server:dev": "node server.js",
     "test": "yarn lint",
-    "lint": "eslint . --fix"
+    "lint": "eslint . --fix",
+    "start": "NODE_ENV=\"production\" node server"
   },
   "repository": {
     "type": "git",
