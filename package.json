@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Abreto/yakult-weibo/issues"
   },
-  "homepage": "https://github.com/Abreto/yakult-weibo#readme"
+  "homepage": "https://github.com/Abreto/yakult-weibo#readme",
+  "dependencies": {
+    "express": "^4.17.0"
+  }
 }
