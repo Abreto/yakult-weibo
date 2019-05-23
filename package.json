@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "server": "node server.js",
-    "test": "npm run lint",
+    "test": "yarn lint",
     "lint": "eslint . --fix"
   },
   "repository": {
