@@ -7,7 +7,7 @@
     "client:dev": "cd client && yarn start",
     "client:build": "cd client && yarn build",
     "client:lint": "cd client && yarn eslint . --fix",
-    "server:dev": "node server.js",
+    "server:dev": "node server",
     "server:lint": "eslint . --fix",
     "build": "yarn client:build",
     "test": "yarn lint",
@@ -26,14 +26,14 @@
   },
   "homepage": "https://github.com/Abreto/yakult-weibo#readme",
   "dependencies": {
-    "express": "^4.17.0"
+    "chokidar": "^3.0.0",
+    "express": "^4.17.0",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
-    "chokidar": "^3.0.0",
     "concurrently": "^4.1.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.17.2",
-    "winston": "^3.2.1"
+    "eslint-plugin-import": "^2.17.2"
   }
 }
