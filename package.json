@@ -24,7 +24,8 @@
   },
   "homepage": "https://github.com/Abreto/yakult-weibo#readme",
   "dependencies": {
-    "express": "^4.17.0"
+    "express": "^4.17.0",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "concurrently": "^4.1.0",
