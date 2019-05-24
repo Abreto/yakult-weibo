@@ -1,5 +1,6 @@
 
 const winston = require('winston');
+const express = require('express');
 
 class App {
   constructor(appConfig) {
@@ -9,10 +10,15 @@ class App {
 
   initialize() {
     this.initializeLogger();
+    this.initializeExpress();
   }
 
   initializeLogger() {
     this.logger = new winston.Logger();
+  }
+
+  initializeExpress() {
+    this.http = express();
   }
 }
 
