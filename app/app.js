@@ -2,6 +2,7 @@
 const winston = require('winston');
 const express = require('express');
 
+const hookComponents = require('./components');
 const graphql = require('./graphql');
 
 class App {
@@ -49,6 +50,7 @@ class App {
   }
 
   loadComponents() {
+    hookComponents(this);
     this.loadGraphql();
   }
 

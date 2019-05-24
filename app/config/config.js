@@ -16,4 +16,11 @@ module.exports = {
   clientDistHomepage: path.join(rootPath, 'client/build/index.html'),
 
   port: process.env.YW_PORT || 3001,
+
+  mongo: {
+    url: process.env.YW_MONGO_URL || 'mongodb://127.0.0.1/yakult_weibo',
+    options: {
+      useNewUrlParser: true,
+    },
+  },
 };
