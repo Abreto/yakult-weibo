@@ -2,10 +2,13 @@
 const winston = require('winston');
 const express = require('express');
 
+const graphql = require('./graphql');
+
 class App {
   constructor(appConfig) {
     this.config = appConfig;
     this.initialize();
+    this.loadComponents();
   }
 
   initialize() {
@@ -35,7 +38,7 @@ class App {
 
     const app = this.http;
 
-    app.get('/api', (req, res) => res.send('API Route.'));
+    // app.get('/api', (req, res) => res.send('API Route.'));
 
     if (this.config.prod) {
       app.use(express.static(this.config.clientDistPath));
@@ -43,6 +46,14 @@ class App {
         res.sendFile(this.config.clientDistHomepage);
       });
     }
+  }
+
+  loadComponents() {
+    this.loadGraphql();
+  }
+
+  loadGraphql() {
+    graphql(this);
   }
 
   listen() {
