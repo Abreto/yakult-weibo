@@ -1,16 +1,19 @@
-const express = require('express');
-const path = require('path');
 
-const app = express();
-const port = 3001;
+const chokidar = require('chokidar');
+const isDev = require('./lib/isDev');
 
-app.get('/api', (req, res) => res.send('API.'));
-
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'));
-  app.get('/*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+if (isDev) {
+  const watcher = chokidar.watch('./app');
+  watcher.on('ready', () => {
+    watcher.on('all', () => {
+      console.log('Clearing /app/ module cache from server'); // eslint-disable-line
+      Object.keys(require.cache).forEach((id) => {
+        if (/[/\\]app[/\\]/.test(id)) delete require.cache[id];
+      });
+    });
   });
 }
 
-app.listen(port, () => console.log(`Test on port ${port}`));
+const app = require('./app');
+
+app.boot();
