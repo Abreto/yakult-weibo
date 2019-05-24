@@ -1,0 +1,37 @@
+{
+  "name": "yakult-weibo",
+  "version": "0.1.0",
+  "description": "A Weibo inspired by yakult",
+  "main": "server.js",
+  "scripts": {
+    "client:dev": "cd client && yarn start",
+    "client:build": "cd client && yarn build",
+    "server:dev": "node server.js",
+    "build": "yarn client:build",
+    "test": "yarn lint",
+    "lint": "eslint . --fix",
+    "start": "NODE_ENV=\"production\" node server",
+    "dev": "concurrently \"yarn server:dev\" \"yarn client:dev\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Abreto/yakult-weibo.git"
+  },
+  "author": "Yakult Yang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Abreto/yakult-weibo/issues"
+  },
+  "homepage": "https://github.com/Abreto/yakult-weibo#readme",
+  "dependencies": {
+    "express": "^4.17.0"
+  },
+  "devDependencies": {
+    "concurrently": "^4.1.0",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.13.0"
+  }
+}
