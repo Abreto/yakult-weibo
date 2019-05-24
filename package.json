@@ -26,14 +26,14 @@
   },
   "homepage": "https://github.com/Abreto/yakult-weibo#readme",
   "dependencies": {
-    "chokidar": "^3.0.0",
-    "express": "^4.17.0",
-    "winston": "^3.2.1"
+    "express": "^4.17.0"
   },
   "devDependencies": {
+    "chokidar": "^3.0.0",
     "concurrently": "^4.1.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.17.2"
+    "eslint-plugin-import": "^2.17.2",
+    "winston": "^3.2.1"
   }
 }
