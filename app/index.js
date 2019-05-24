@@ -15,6 +15,6 @@ if (process.env.NODE_ENV === 'production') {
 
 module.exports = {
   boot: () => {
-    app.listen(port, () => console.log(`Test on port ${port}`));
+    app.listen(port, () => console.log(`Test on port ${port}`)); // eslint-disable-line
   },
 };
