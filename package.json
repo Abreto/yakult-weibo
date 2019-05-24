@@ -26,8 +26,10 @@
   },
   "homepage": "https://github.com/Abreto/yakult-weibo#readme",
   "dependencies": {
+    "apollo-server-express": "^2.5.0",
     "chokidar": "^3.0.0",
     "express": "^4.17.0",
+    "graphql": "^14.3.1",
     "lodash": "^4.17.11",
     "winston": "^3.2.1"
   },
