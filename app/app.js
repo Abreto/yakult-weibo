@@ -5,6 +5,8 @@ const express = require('express');
 const hookComponents = require('./components');
 const graphql = require('./graphql');
 
+const router = require('./routes');
+
 class App {
   constructor(appConfig) {
     this.config = appConfig;
@@ -36,24 +38,17 @@ class App {
 
   initializeExpress() {
     this.http = express();
-
-    const app = this.http;
-
-    if (this.config.prod) {
-      app.use(express.static(this.config.clientDistPath));
-      app.get('/*', (req, res) => {
-        res.sendFile(this.config.clientDistHomepage);
-      });
-    }
   }
 
   loadComponents() {
     hookComponents(this);
     this.loadGraphql();
+
+    router(this);
   }
 
   loadGraphql() {
-    graphql(this);
+    this.apolloServer = graphql(this);
   }
 
   listen() {

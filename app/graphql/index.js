@@ -36,18 +36,11 @@ const resolvers = {
   },
 };
 
-module.exports = (app) => {
-  const server = new ApolloServer({
-    typeDefs,
-    resolvers,
-    context: ({ req }) => ({
-      req,
-      app,
-    }),
-  });
-
-  server.applyMiddleware({
-    app: app.http,
-    path: '/api',
-  });
-};
+module.exports = app => new ApolloServer({
+  typeDefs,
+  resolvers,
+  context: ({ req }) => ({
+    req,
+    app,
+  }),
+});
