@@ -16,7 +16,7 @@ module.exports = ({
     });
   }
 
-  http.ues((err, req, res, next) => { // eslint-disable-line
+  http.use((err, req, res, next) => { // eslint-disable-line
     logger.error(err.stack);
     res.status(500).send('Something broke!');
   });
