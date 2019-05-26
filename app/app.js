@@ -39,8 +39,6 @@ class App {
 
     const app = this.http;
 
-    // app.get('/api', (req, res) => res.send('API Route.'));
-
     if (this.config.prod) {
       app.use(express.static(this.config.clientDistPath));
       app.get('/*', (req, res) => {
