@@ -1,0 +1,15 @@
+
+# Query Root
+type Query {
+  # Version of query API
+  version: String!
+
+  # Hello
+  hello: String!
+}
+
+# Mutation Root
+type Mutation {
+  # Version of mutation API
+  version: String!
+}
