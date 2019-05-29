@@ -7,5 +7,6 @@ module.exports = app => new ApolloServer({
   context: ({ req }) => ({
     req,
     app,
+    model: app.model,
   }),
 });

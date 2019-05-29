@@ -1,0 +1,13 @@
+
+type Config {
+  key: String!,
+  value: String,
+}
+
+extend type Query {
+  config(key: String!): String,
+}
+
+extend type Mutation {
+  config(key: String!, value: String): Boolean!,
+}
