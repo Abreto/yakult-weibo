@@ -24,8 +24,6 @@ types.forEach((type) => {
   }
 });
 
-console.log(schemas, resolverMap);
-
 module.exports = makeExecutableSchema({
   typeDefs: schemas,
   resolvers: resolverMap,
