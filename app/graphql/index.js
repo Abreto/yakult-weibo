@@ -9,4 +9,11 @@ module.exports = app => new ApolloServer({
     app,
     model: app.model,
   }),
+  formatError: (err) => {
+    if (err.extensions.code === 'YW_EXPOSE') {
+      return err;
+    }
+    app.logger.error(err);
+    return new Error('Internal server error');
+  },
 });
