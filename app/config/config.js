@@ -21,6 +21,7 @@ module.exports = {
     url: process.env.YW_MONGO_URL || 'mongodb://127.0.0.1/yakult_weibo',
     options: {
       useNewUrlParser: true,
+      useFindAndModify: false,
     },
   },
 };
