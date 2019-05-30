@@ -14,7 +14,8 @@ module.exports = app => new ApolloServer({
       delete err.extensions.exception.stacktrace; //eslint-disable-line
       return err;
     }
-    app.logger.error(err);
+    app.logger.error(err, { err });
+    app.logger.error(err.extensions.exception.stacktrace.join('\n'));
     const ierr = new ApolloError('Internal server error', 'INTERNAL_SERVER_ERROR', {
       message: 'Internal server error',
     });

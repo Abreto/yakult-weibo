@@ -1,12 +1,18 @@
 
 module.exports = {
   Query: {
-    config: async (_, { key }, { model }) => JSON.stringify(await model.config.find({ key })),
+    config: async (_, { key }, { model }) => {
+      const res = await model.config.findOne({ key });
+      if (res === null) return null;
+      return res.value;
+    },
   },
   Mutation: {
-    config: async (_, { key, value }, { app }) => {
-      app.logger.info(`Yeah, you want ${key} to be ${value}.`);
-      return true;
+    config: async (_, { key, value }, { model }) => {
+      const result = await model.config.updateOne({ key }, { value }, {
+        upsert: true,
+      });
+      return (result.ok === 1);
     },
   },
 };
