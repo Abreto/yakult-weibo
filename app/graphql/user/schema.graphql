@@ -4,3 +4,9 @@ enum UserType {
   MEMBER
   GUEST
 }
+
+type User {
+  id: String!,
+  username: String!,
+  usertype: UserType
+}
