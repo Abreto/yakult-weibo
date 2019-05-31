@@ -4,10 +4,11 @@ const schema = require('./schema');
 
 module.exports = app => new ApolloServer({
   schema,
-  context: ({ req }) => ({
+  context: async ({ req }) => ({
     req,
     app,
     model: app.model,
+    auth: await app.service.user.auth(req.headers.authorization),
   }),
   formatError: (err) => {
     app.logger.error(err);
