@@ -8,7 +8,9 @@ module.exports = {
     },
   },
   Mutation: {
-    config: async (_, { key, value }, { model }) => {
+    config: async (_, { key, value }, { model, checkPermission }) => {
+      checkPermission('ADMIN');
+
       const result = await model.config.updateOne({ key }, { value }, {
         upsert: true,
       });

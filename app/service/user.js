@@ -1,4 +1,9 @@
 
+const typeMap = {
+  ADMIN: 0,
+  MEMBER: 1,
+};
+
 module.exports = ({ model }) => ({
   auth: async (token) => {
     if (token === undefined) return null;
@@ -19,5 +24,13 @@ module.exports = ({ model }) => ({
     } catch (e) {
       return null;
     }
+  },
+
+  check: (auth, role) => {
+    if (!auth) return false;
+
+    if (!(['ADMIN', 'MEMBER'].includes(auth.usertype))) return false;
+
+    return typeMap[auth.usertype] <= typeMap[role];
   },
 });
