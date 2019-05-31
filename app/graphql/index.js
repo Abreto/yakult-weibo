@@ -11,6 +11,8 @@ module.exports = app => new ApolloServer({
   }),
   formatError: (err) => {
     app.logger.error(err);
+    app.logger.error(err.extensions.exception.stacktrace.join('\n'));
+    delete err.extensions.exception.stacktrace; // eslint-disable-line
     return err;
     // if (err.extensions.code === 'YW_EXPOSE') {
     //   delete err.extensions.exception.stacktrace; //eslint-disable-line
