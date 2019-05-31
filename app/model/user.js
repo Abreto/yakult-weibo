@@ -9,6 +9,14 @@ module.exports = ({ mongoose }) => {
       unique: true,
     },
     password: String,
+    usertype: {
+      type: String,
+      enum: [
+        'ADMIN',
+        'MEMBER',
+        'GUEST',
+      ],
+    },
   });
 
   return mongoose.model('User', userSchema);
