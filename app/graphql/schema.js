@@ -2,7 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 const _ = require('lodash');
-const { makeExecutableSchema } = require('graphql-tools');
+const { makeExecutableSchema } = require('apollo-server-express');
 
 const basePath = path.join(__dirname);
 const types = fs.readdirSync(basePath);
