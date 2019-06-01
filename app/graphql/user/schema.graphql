@@ -6,7 +6,21 @@ enum UserType {
 }
 
 type User {
-  id: String!,
-  username: String!,
+  id: String!
+  username: String!
   usertype: UserType
+}
+
+input UserRegisterForm {
+  username: String!
+  password: String!
+}
+
+extend type Query {
+  user(id: String): User
+  whoami: User
+}
+
+extend type Mutation {
+  register(form: UserRegisterForm): User
 }
