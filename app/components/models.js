@@ -7,5 +7,6 @@ module.exports = (app) => {
     user: require('../model/user')(app),      // eslint-disable-line
     post: require('../model/post')(app),      // eslint-disable-line
     reply: require('../model/reply')(app),    // eslint-disable-line
+    fav: require('../model/favourite')(app),  // eslint-disable-line
   });
 };

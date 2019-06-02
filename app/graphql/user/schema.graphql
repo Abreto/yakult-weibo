@@ -10,6 +10,7 @@ type User {
   username: String!
   usertype: UserType!
   following: [User]!
+  favourites: [Post]!
 }
 
 input UserRegisterForm {
@@ -39,4 +40,6 @@ extend type Mutation {
 
   follow(id: String!): Boolean!
   unfollow(id: String!): Boolean!
+
+  star(id: String!): Boolean!
 }

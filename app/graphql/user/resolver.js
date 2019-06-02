@@ -77,6 +77,23 @@ module.exports = {
         return false;
       }
     },
+
+    star: async (_, { id }, {
+      logger, auth, model, checkPermission,
+    }) => {
+      checkPermission('MEMBER');
+
+      try {
+        const res = await model.fav.create({
+          user: auth.id,
+          post: id,
+        });
+        return (res !== null);
+      } catch (e) {
+        logger.warn(e);
+        return false;
+      }
+    },
   },
 
   User: {
@@ -93,6 +110,19 @@ module.exports = {
           _id: { $in: followingIds },
         });
         return followings;
+      } catch (e) {
+        logger.warn(e);
+        return [];
+      }
+    },
+
+    favourites: async (parent, _, { logger, model }) => {
+      try {
+        const pids = await model.fav.find({
+          user: parent.id,
+        }, 'post');
+        console.log(pids);
+        return [];
       } catch (e) {
         logger.warn(e);
         return [];
