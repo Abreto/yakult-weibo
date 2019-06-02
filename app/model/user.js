@@ -1,6 +1,7 @@
 
 module.exports = ({ mongoose }) => {
   const { Schema } = mongoose;
+  const { ObjectId } = Schema.Types;
 
   const userSchema = new Schema({
     username: {
@@ -17,6 +18,10 @@ module.exports = ({ mongoose }) => {
         'GUEST',
       ],
       default: 'MEMBER',
+    },
+    following: {
+      type: [ObjectId],
+      default: [],
     },
   });
 
