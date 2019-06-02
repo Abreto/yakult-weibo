@@ -48,4 +48,25 @@ module.exports = {
       }
     },
   },
+
+  User: {
+    following: async (parent, _, { logger, model }) => {
+      try {
+        const { id } = parent;
+        const user = await model.user.findById(id);
+        if (user === null) return [];
+
+        const followingIds = user.following;
+        if (!followingIds) return [];
+
+        const followings = await model.user.find({
+          _id: { $in: followingIds },
+        });
+        return followings;
+      } catch (e) {
+        logger.warn(e);
+        return [];
+      }
+    },
+  },
 };
