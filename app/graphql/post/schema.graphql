@@ -1,0 +1,16 @@
+
+type Post {
+  id: String!
+  poster: User!
+  content: String!
+  originator: User
+}
+
+extend type Query {
+  posts(onlyFollowed: Boolean): [Post]
+}
+
+extend type Mutation {
+  post(content: String): Boolean!
+  forward(originalPostId: String): Boolean!
+}
