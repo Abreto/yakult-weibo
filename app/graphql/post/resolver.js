@@ -13,6 +13,26 @@ module.exports = {
         return null;
       }
     },
+
+    posts: async (_, { onlyFollowed }, { logger, model, auth }) => {
+      if (onlyFollowed === undefined) onlyFollowed = false; // eslint-disable-line
+      if (auth === null) onlyFollowed = false; // eslint-disable-line
+
+      try {
+        let query = model.post.find({});
+        if (onlyFollowed) {
+          query = query.where({
+            poster: {
+              $in: auth.following,
+            },
+          });
+        }
+        return await query;
+      } catch (e) {
+        logger.warn(e);
+        return [];
+      }
+    },
   },
   Mutation: {
     post: async (_, { content }, {
