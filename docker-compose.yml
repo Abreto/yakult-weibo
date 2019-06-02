@@ -1,0 +1,10 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+    - "3001:3001"
+    environment:
+      YW_MONGO_URL: "mongodb://mongo/yakult_weibo"
+  mongo:
+    image: mongo
