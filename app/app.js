@@ -51,6 +51,18 @@ class App {
     this.apolloServer = graphql(this);
   }
 
+  async install() {
+    const { user } = this.model;
+    const admin = await user.findOne({ username: 'root' });
+    if (admin === null) {
+      await user.create({
+        username: 'root',
+        password: 'root',
+        usertype: 'ADMIN',
+      });
+    }
+  }
+
   listen() {
     this.http.listen(this.config.port, () => {
       this.logger.info(`🚀 Server listen on ${this.config.port}`);
