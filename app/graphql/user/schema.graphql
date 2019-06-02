@@ -24,6 +24,8 @@ extend type Query {
   # if id is not specified, the `whoami` is returned.
   user(id: String): User
 
+  userByName(username: String!): User
+
   whoami: User
 }
 

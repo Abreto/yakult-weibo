@@ -12,6 +12,15 @@ module.exports = {
       }
     },
 
+    userByName: async (_, { username }, { logger, model }) => {
+      try {
+        return await model.user.findOne({ username });
+      } catch (e) {
+        logger.warn(e);
+        return null;
+      }
+    },
+
     whoami: (_, params, { auth }) => auth,
   },
 
