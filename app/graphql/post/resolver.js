@@ -1,5 +1,19 @@
 
 module.exports = {
+  Post: {
+    poster: async (parent, _, { model }) => model.user.findById(parent.poster),
+    originator: async (parent, _, { model }) => model.user.findById(parent.originator),
+  },
+  Query: {
+    post: async (_, { id }, { logger, model }) => {
+      try {
+        return await model.post.findById(id);
+      } catch (e) {
+        logger.warn(e);
+        return null;
+      }
+    },
+  },
   Mutation: {
     post: async (_, { content }, {
       logger, model, auth, checkPermission,
