@@ -16,6 +16,7 @@ module.exports = ({ mongoose }) => {
         'MEMBER',
         'GUEST',
       ],
+      default: 'MEMBER',
     },
   });
 
