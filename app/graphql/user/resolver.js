@@ -118,11 +118,12 @@ module.exports = {
 
     favourites: async (parent, _, { logger, model }) => {
       try {
-        const pids = await model.fav.find({
+        const pids = (await model.fav.find({
           user: parent.id,
-        }, 'post');
-        console.log(pids);
-        return [];
+        }, 'post')).map(rel => rel.post);
+        return await model.post.find({
+          _id: { $in: pids },
+        });
       } catch (e) {
         logger.warn(e);
         return [];
