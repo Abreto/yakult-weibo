@@ -14,4 +14,17 @@ module.exports = {
 
     whoami: (_, params, { auth }) => auth,
   },
+
+  Mutation: {
+    register: async (_, { form }, { model }) => {
+      try {
+        return await model.user.create({
+          username: form.username,
+          password: form.password,
+        });
+      } catch (e) {
+        return null;
+      }
+    },
+  },
 };
