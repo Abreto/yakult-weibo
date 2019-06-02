@@ -64,6 +64,19 @@ module.exports = {
         return false;
       }
     },
+
+    unfollow: async (_, { id }, { logger, auth, checkPermission }) => {
+      checkPermission('MEMBER');
+
+      try {
+        auth.following = auth.following.filter(fid => String(fid) !== id); // eslint-disable-line
+        await auth.save();
+        return true;
+      } catch (e) {
+        logger.warn(e);
+        return false;
+      }
+    },
   },
 
   User: {
