@@ -12,6 +12,7 @@ module.exports = app => new ApolloServer({
     const ctx = {
       req,
       app,
+      logger: app.logger,
       model: app.model,
       service: app.service,
       auth: await app.service.user.auth(req.headers.authorization),
