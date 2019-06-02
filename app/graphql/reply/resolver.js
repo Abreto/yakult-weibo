@@ -1,5 +1,21 @@
 
 module.exports = {
+  Reply: {
+    poster: async (parent, _, { model }) => model.user.findById(parent.poster),
+  },
+  Query: {
+    replies: async (_, { to }, { app, logger, model }) => {
+      try {
+        const { ObjectId } = app.mongoose.Types;
+        return await model.reply.find({
+          to: ObjectId(to),
+        });
+      } catch (e) {
+        logger.warn(e);
+        return [];
+      }
+    },
+  },
   Mutation: {
     reply: async (_, { to, content }, {
       logger, auth, model, checkPermission,
@@ -20,7 +36,7 @@ module.exports = {
       } catch (e) {
         logger.warn(e);
         return false;
-      };
+      }
     },
   },
 };

@@ -2,7 +2,8 @@
 type Reply {
   id: String!
   poster: User!
-  content: String
+  content: String!
+  createdAt: String!
 }
 
 extend type Query {
