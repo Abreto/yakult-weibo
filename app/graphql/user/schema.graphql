@@ -25,4 +25,6 @@ extend type Query {
 
 extend type Mutation {
   register(form: UserRegisterForm): User
+
+  remove(id: String!): Boolean!
 }
