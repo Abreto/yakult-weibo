@@ -9,5 +9,5 @@ module.exports = ({ mongoose }) => {
     content: String,
   }, { timestamps: true });
 
-  return mongoose.module('Reply', replySchema);
+  return mongoose.model('Reply', replySchema);
 };

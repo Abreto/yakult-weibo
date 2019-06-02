@@ -1,0 +1,14 @@
+
+type Reply {
+  id: String!
+  poster: User!
+  content: String
+}
+
+extend type Query {
+  replies(to: String!): [Reply]!
+}
+
+extend type Mutation {
+  reply(to: String!, content: String!): Boolean!
+}
