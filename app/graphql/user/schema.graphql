@@ -4,3 +4,25 @@ enum UserType {
   MEMBER
   GUEST
 }
+
+type User {
+  id: String!
+  username: String!
+  usertype: UserType
+}
+
+input UserRegisterForm {
+  username: String!
+  password: String!
+}
+
+extend type Query {
+  # if id is not specified, the `whoami` is returned.
+  user(id: String): User
+
+  whoami: User
+}
+
+extend type Mutation {
+  register(form: UserRegisterForm): User
+}
