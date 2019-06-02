@@ -1,7 +1,9 @@
 
 module.exports = {
   Mutation: {
-    post: async (_, { content }, { logger, model, auth, checkPermission }) => {
+    post: async (_, { content }, {
+      logger, model, auth, checkPermission,
+    }) => {
       checkPermission('MEMBER');
 
       try {
