@@ -47,6 +47,23 @@ module.exports = {
         return false;
       }
     },
+
+    follow: async (_, { id }, { logger, auth, checkPermission }) => {
+      checkPermission('MEMBER');
+
+      try {
+        if (auth.id === id) return false;
+        if (auth.following.includes(id)) return true;
+
+        auth.following.push(id);
+        await auth.save();
+
+        return true;
+      } catch (e) {
+        logger.warn(e);
+        return false;
+      }
+    },
   },
 
   User: {

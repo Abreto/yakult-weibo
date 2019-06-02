@@ -36,4 +36,7 @@ extend type Mutation {
   updateUser(form: UserUpdateForm): Boolean!
 
   removeUser(id: String!): Boolean!
+
+  follow(id: String!): Boolean!
+  unfollow(id: String!): Boolean!
 }
