@@ -28,7 +28,7 @@ module.exports = {
       }
     },
 
-    remove: async (_, { id }, { logger, model }) => {
+    removeUser: async (_, { id }, { logger, model }) => {
       try {
         if (id === undefined) return false;
         const res = await model.user.remove({ id });

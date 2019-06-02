@@ -16,6 +16,10 @@ input UserRegisterForm {
   password: String!
 }
 
+input UserUpdateForm {
+  password: String
+}
+
 extend type Query {
   # if id is not specified, the `whoami` is returned.
   user(id: String): User
@@ -26,5 +30,7 @@ extend type Query {
 extend type Mutation {
   register(form: UserRegisterForm): User
 
-  remove(id: String!): Boolean!
+  updateUser(form: UserUpdateForm): Boolean!
+
+  removeUser(id: String!): Boolean!
 }
