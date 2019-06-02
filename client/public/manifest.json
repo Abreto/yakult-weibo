@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Yakult Weibo",
+  "name": "A Weibo inspired by yakult",
   "icons": [
     {
       "src": "favicon.ico",
