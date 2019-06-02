@@ -10,7 +10,7 @@ module.exports = ({ mongoose }) => {
       type: ObjectId,
       default: null,
     },
-  });
+  }, { timestamps: true });
 
   return mongoose.model('Post', postSchema);
 };

@@ -4,13 +4,15 @@ type Post {
   poster: User!
   content: String!
   originator: User
+  createdAt: String!
 }
 
 extend type Query {
+  post(id: String): Post
   posts(onlyFollowed: Boolean): [Post]
 }
 
 extend type Mutation {
   post(content: String): Boolean!
-  forward(originalPostId: String): Boolean!
+  forward(id: String): Boolean!
 }
