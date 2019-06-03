@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import { Container } from 'react-bootstrap';
-import Navigator from '../components/navbar';
+import Navigator from '../components/navbar/index';
 
 import './weibo.css';
 

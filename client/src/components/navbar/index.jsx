@@ -27,7 +27,8 @@ function Navigator() {
       <Link to="/explore"><Brand>Yakult Weibo</Brand></Link>
 
       <Nav className="mr-auto">
-        <Navlink to="/home">Home</Navlink>
+        <Navlink to="/explore">Explore</Navlink>
+        <Navlink to="/home">Personal Home</Navlink>
         <Navlink to="/admin">Admin Panel</Navlink>
       </Nav>
     </Navbar>
