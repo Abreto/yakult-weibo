@@ -27,8 +27,8 @@ class NavLoginzone extends React.Component {
     const { client, refetch } = this.props;
     const token = btoa(`${username}:${password}`);
     const header = `Basic ${token}`;
-    const test = await client.query({
-      query: gql`{ user { id } }`,
+    const { data: { user } } = await client.query({
+      query: gql`{ user { username } }`,
       fetchPolicy: 'network-only',
       context: {
         headers: {
@@ -37,10 +37,12 @@ class NavLoginzone extends React.Component {
       },
     });
 
-    if (test.user) {
-      await localStorage.setItem('token', header);
+    if (user !== null) {
+      localStorage.setItem('token', header);
 
       refetch();
+    } else {
+      alert('Incorrect password or nonexisting user');
     }
   }
 
@@ -63,7 +65,7 @@ class NavLoginzone extends React.Component {
     return (
       <>
         <Form inline>
-          <InputGroup className=" mr-sm-2">
+          <InputGroup className="mr-sm-2">
             <Form.Control
               type="text"
               size="sm"

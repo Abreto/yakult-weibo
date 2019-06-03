@@ -1,20 +1,33 @@
 import React from 'react';
 
-import { Navbar } from 'react-bootstrap';
+import { Navbar, Button } from 'react-bootstrap';
 
-const Infozone = ({ username }) => {
+import { withApollo } from 'react-apollo';
+
+const Infozone = ({ username, refetch, client }) => {
   let hide = false;
   if (!username) hide = true;
 
   return (
     <div hidden={hide}>
-      <Navbar.Text>
+      <Navbar.Text className="mr-sm-2">
         Hello,
         {' '}
         {username}
       </Navbar.Text>
+      <Button
+        size="sm"
+        variant="primary"
+        onClick={async () => {
+          localStorage.removeItem('token');
+          await client.resetStore();
+          refetch();
+        }}
+      >
+        Sign out
+      </Button>
     </div>
   );
 };
 
-export default Infozone;
+export default withApollo(Infozone);
