@@ -1,12 +1,12 @@
 import React from 'react';
 
 import ApiProvider from './graphql/provider';
-import Welcome from './welcome';
+import Layout from './layout';
 
 function App() {
   return (
     <ApiProvider>
-      <Welcome />
+      <Layout />
     </ApiProvider>
   );
 }
