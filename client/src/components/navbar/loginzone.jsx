@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { withApollo } from 'react-apollo';
+import { gql } from 'apollo-boost';
+
 import {
   Form,
   InputGroup,
@@ -14,7 +17,31 @@ class NavLoginzone extends React.Component {
 
     this.state = {
       registerModalShow: false,
+      username: '',
+      password: '',
     };
+  }
+
+  async handleSignIn() {
+    const { username, password } = this.state;
+    const { client, refetch } = this.props;
+    const token = btoa(`${username}:${password}`);
+    const header = `Basic ${token}`;
+    const test = await client.query({
+      query: gql`{ user { id } }`,
+      fetchPolicy: 'network-only',
+      context: {
+        headers: {
+          Authorization: header,
+        },
+      },
+    });
+
+    if (test.user) {
+      await localStorage.setItem('token', header);
+
+      refetch();
+    }
   }
 
   showRegisterModal() {
@@ -31,23 +58,46 @@ class NavLoginzone extends React.Component {
 
 
   render() {
-    const { registerModalShow } = this.state;
+    const { registerModalShow, username, password } = this.state;
 
     return (
       <>
         <Form inline>
           <InputGroup className=" mr-sm-2">
-            <Form.Control type="text" size="sm" placeholder="Username" />
-            <Form.Control type="password" size="sm" placeholder="Password" />
+            <Form.Control
+              type="text"
+              size="sm"
+              placeholder="Username"
+              value={username}
+              onChange={e => this.setState({
+                username: e.target.value,
+              })}
+            />
+            <Form.Control
+              type="password"
+              size="sm"
+              placeholder="Password"
+              value={password}
+              onChange={e => this.setState({
+                password: e.target.value,
+              })}
+            />
           </InputGroup>
-          <Button size="sm" variant="primary" className="mr-sm-2">Login</Button>
+          <Button
+            size="sm"
+            variant="primary"
+            className="mr-sm-2"
+            onClick={() => this.handleSignIn()}
+          >
+            Sign in
+          </Button>
           <Button
             size="sm"
             variant="success"
             className="mr-sm-2"
             onClick={() => this.showRegisterModal()}
           >
-            Register
+            Sign up
           </Button>
         </Form>
         <RegisterModal
@@ -59,4 +109,4 @@ class NavLoginzone extends React.Component {
   }
 }
 
-export default NavLoginzone;
+export default withApollo(NavLoginzone);
