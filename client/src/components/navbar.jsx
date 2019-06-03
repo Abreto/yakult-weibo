@@ -1,8 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
-import { Navbar } from 'react-bootstrap';
+import { Navbar, Nav } from 'react-bootstrap';
 import { Brand } from 'react-bootstrap/Navbar';
+
+function Navlink({ to, children }) {
+  return (
+    <>
+      <NavLink to={to} activeClassName="active">
+        <Nav.Link href={to}>
+          {children}
+        </Nav.Link>
+      </NavLink>
+    </>
+  );
+}
 
 function Navigator() {
   return (
@@ -13,6 +25,11 @@ function Navigator() {
       fixed="top"
     >
       <Link to="/explore"><Brand>Yakult Weibo</Brand></Link>
+
+      <Nav className="mr-auto">
+        <Navlink to="/home">Home</Navlink>
+        <Navlink to="/admin">Admin Panel</Navlink>
+      </Nav>
     </Navbar>
   );
 }
