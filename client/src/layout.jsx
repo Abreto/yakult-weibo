@@ -6,13 +6,13 @@ import {
   Switch,
 } from 'react-router-dom';
 import Welcome from './screens/welcome';
-import Weibo from './screens/weibo';
+import WeiboLayout from './screens/weibo-layout';
 
 const Layout = () => (
   <Router>
     <Switch>
       <Route exact path="/" component={Welcome} />
-      <Route component={Weibo} />
+      <Route component={WeiboLayout} />
     </Switch>
   </Router>
 );

@@ -5,7 +5,7 @@ import { Container } from 'react-bootstrap';
 import Navigator from '../components/navbar/index';
 import NoticeAlert from '../components/notice-alert';
 
-import './weibo.css';
+import './weibo-layout.css';
 
 function Home() {
   return <h1>Home</h1>;
@@ -23,7 +23,7 @@ function Default() {
   );
 }
 
-const Weibo = () => (
+const WeiboLayout = () => (
   <>
     <Navigator />
     <Container>
@@ -37,4 +37,4 @@ const Weibo = () => (
   </>
 );
 
-export default Weibo;
+export default WeiboLayout;
