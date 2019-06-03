@@ -27,11 +27,14 @@ function Navigator() {
     >
       <Link to="/explore"><Brand>Yakult Weibo</Brand></Link>
 
-      <Nav className="mr-auto">
-        <Navlink to="/explore">Explore</Navlink>
-        <Navlink to="/home">Personal Home</Navlink>
-        <Navlink to="/admin">Admin Panel</Navlink>
-      </Nav>
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      <Navbar.Collapse id="responsive-navbar-nav">
+        <Nav className="mr-auto">
+          <Navlink to="/explore">Explore</Navlink>
+          <Navlink to="/home">Personal Home</Navlink>
+          <Navlink to="/admin">Admin Panel</Navlink>
+        </Nav>
+      </Navbar.Collapse>
     </Navbar>
   );
 }
