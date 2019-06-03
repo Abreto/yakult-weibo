@@ -1,7 +1,10 @@
 import React from 'react';
-
 import { Switch, Route } from 'react-router-dom';
 
+import { Container } from 'react-bootstrap';
+import Navigator from '../components/navbar';
+
+import './weibo.css';
 
 function Home() {
   return <h1>Home</h1>;
@@ -12,18 +15,24 @@ function Profile() {
 }
 
 function Default() {
-  return <h2>Default</h2>;
+  return (
+    <>
+      <h2>Default</h2>
+    </>
+  );
 }
 
 const Weibo = () => (
-  <div>
-    <h1>Weibo Framwork</h1>
-    <Switch>
-      <Route path="/home" component={Home} />
-      <Route path="/profile" component={Profile} />
-      <Route component={Default} />
-    </Switch>
-  </div>
+  <>
+    <Navigator />
+    <Container>
+      <Switch>
+        <Route path="/home" component={Home} />
+        <Route path="/profile" component={Profile} />
+        <Route component={Default} />
+      </Switch>
+    </Container>
+  </>
 );
 
 export default Weibo;
