@@ -4,6 +4,8 @@ import { Link, NavLink } from 'react-router-dom';
 import { Navbar, Nav } from 'react-bootstrap';
 import { Brand } from 'react-bootstrap/Navbar';
 
+import NavUserzone from './userzone';
+
 function Navlink({ to, children }) {
   return (
     <>
@@ -34,6 +36,8 @@ function Navigator() {
           <Navlink to="/home">Personal Home</Navlink>
           <Navlink to="/admin">Admin Panel</Navlink>
         </Nav>
+
+        <NavUserzone />
       </Navbar.Collapse>
     </Navbar>
   );
