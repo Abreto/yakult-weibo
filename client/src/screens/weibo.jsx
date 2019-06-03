@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import Navigator from '../components/navbar/index';
 
-import './weibo.css';
+// import './weibo.css';
 
 function Home() {
   return <h1>Home</h1>;

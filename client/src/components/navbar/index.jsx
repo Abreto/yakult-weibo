@@ -19,10 +19,11 @@ function Navlink({ to, children }) {
 function Navigator() {
   return (
     <Navbar
+      collapseOnSelect
       expand="lg"
       bg="dark"
       variant="dark"
-      fixed="top"
+      sticky="top"
     >
       <Link to="/explore"><Brand>Yakult Weibo</Brand></Link>
 
