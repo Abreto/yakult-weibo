@@ -6,6 +6,7 @@ import Navigator from '../components/navbar/index';
 import NoticeAlert from '../components/notice-alert';
 
 import './weibo-layout.css';
+import Post from '../components/post/index';
 
 function Home() {
   return <h1>Home</h1>;
@@ -19,6 +20,7 @@ function Default() {
   return (
     <>
       <h2>Default</h2>
+      <Post />
     </>
   );
 }

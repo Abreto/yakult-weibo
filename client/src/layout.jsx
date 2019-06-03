@@ -5,7 +5,7 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-import Welcome from './screens/welcome';
+import Welcome from './screens/welcome/index';
 import WeiboLayout from './screens/weibo-layout';
 
 const Layout = () => (
