@@ -2,13 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
-import logo from './logo.svg';
-import bg from './bg.jpg';
+import logo from './logo.png';
+import bg from './bg.png';
 import './welcome.css';
 
 const bgStyle = {
   backgroundImage: `url(${bg})`,
-  backgroundSize: '100%',
+  // backgroundSize: '100%',
+  backgroundPosition: 'center',
 };
 
 function Welcome() {
