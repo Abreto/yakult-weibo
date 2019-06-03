@@ -9,10 +9,13 @@ import NavUserzone from './userzone';
 function Navlink({ to, children }) {
   return (
     <>
-      <NavLink to={to} activeClassName="active">
+      {/* <NavLink to={to} activeClassName="active" className="nav-link">
         <Nav.Link href={to}>
           {children}
         </Nav.Link>
+      </NavLink> */}
+      <NavLink to={to} className="nav-link" activeClassName="active">
+        {children}
       </NavLink>
     </>
   );
