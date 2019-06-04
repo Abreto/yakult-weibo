@@ -22,6 +22,21 @@ module.exports = {
     },
 
     whoami: (_, params, { auth }) => auth,
+
+    isStarring: async (_, { id }, { logger, auth, model }) => {
+      if (!auth) return false;
+
+      try {
+        const res = await model.fav.countDocument({
+          user: auth.id,
+          post: id,
+        });
+        return (res > 0);
+      } catch (e) {
+        logger.warn(e);
+        return false;
+      }
+    },
   },
 
   Mutation: {
@@ -72,21 +87,6 @@ module.exports = {
         auth.following = auth.following.filter(fid => String(fid) !== id); // eslint-disable-line
         await auth.save();
         return true;
-      } catch (e) {
-        logger.warn(e);
-        return false;
-      }
-    },
-
-    isStarring: async (_, { id }, { logger, auth, model }) => {
-      if (!auth) return false;
-
-      try {
-        const res = await model.fav.countDocument({
-          user: auth.id,
-          post: id,
-        });
-        return (res > 0);
       } catch (e) {
         logger.warn(e);
         return false;

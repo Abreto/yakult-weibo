@@ -29,6 +29,8 @@ extend type Query {
   userByName(username: String!): User
 
   whoami: User
+
+  isStarring(id: String!): Boolean!
 }
 
 extend type Mutation {
@@ -41,7 +43,6 @@ extend type Mutation {
   follow(id: String!): Boolean!
   unfollow(id: String!): Boolean!
 
-  isStarring(id: String!): Boolean!
   star(id: String!): Boolean!
   unstar(id: String!): Boolean!
 }
