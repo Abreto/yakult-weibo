@@ -8,11 +8,11 @@ type Post {
 }
 
 extend type Query {
-  post(id: String): Post
+  post(id: String!): Post
   posts(onlyFollowed: Boolean): [Post]
 }
 
 extend type Mutation {
-  post(content: String): Boolean!
-  forward(id: String): Boolean!
+  post(content: String!): Boolean!
+  forward(id: String!): Boolean!
 }
