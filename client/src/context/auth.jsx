@@ -70,6 +70,7 @@ class AuthProviderPure extends React.Component {
 
     if (!user) {
       /** failed login */
+      alert('Failed to sign in: Invalid login');
     } else {
       localStorage.setItem('token', header);
       await this.updateUser(user);
