@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Spin } from 'antd';
+import { Spin, List } from 'antd';
 
 import { Query } from 'react-apollo';
 import { gql } from 'apollo-boost';
@@ -12,15 +12,6 @@ const GET_ALL_POSTS = gql`
   query Posts($onlyFollowed: Boolean!){
     posts(onlyFollowed: $onlyFollowed) {
       id
-      # poster {
-      #   id
-      #   username
-      # }
-      # originator {
-      #   id username
-      # }
-      # content
-      # createdAt
     }
   }
 `;
@@ -45,7 +36,20 @@ const PostsPure = ({ onlyFollowed }) => (
         );
       }
 
-      return data.posts.map(post => <Post key={post.id} id={post.id} />);
+      const { posts } = data;
+      return (
+        <List
+          bordered
+          header={<h2>Posts</h2>}
+          itemLayout="horizontal"
+          dataSource={posts}
+          renderItem={post => (
+            <List.Item>
+              <Post id={post.id} />
+            </List.Item>
+          )}
+        />
+      );
     }}
   </Query>
 );

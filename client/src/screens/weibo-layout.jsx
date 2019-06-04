@@ -25,7 +25,7 @@ function Profile() {
 function Default() {
   return (
     <>
-      <h2>Posts</h2>
+      {/* <h2>Posts</h2> */}
       <Posts />
     </>
   );
