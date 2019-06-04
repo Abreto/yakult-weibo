@@ -41,7 +41,7 @@ const PostsPure = ({ onlyFollowed }) => (
       return (
         <List
           bordered
-          header={<Button>Posts</Button>}
+          header={<Button>Whats Happening?</Button>}
           itemLayout="vertical"
           dataSource={posts}
           renderItem={post => <Post id={post.id} />}

@@ -18,7 +18,7 @@ function Navlink({ to, children }) {
 Navlink.propTypes = {
   to: PropTypes.string.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
-  children: PropTypes.object.isRequired,
+  children: PropTypes.any.isRequired,
 };
 
 const NavPersonalHome = () => (
