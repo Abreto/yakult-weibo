@@ -80,7 +80,7 @@ class RegisterModal extends React.Component {
       return;
     }
 
-    await onSuccess(username, password);
+    onSuccess(username, password);
   }
 
   validateForm() {

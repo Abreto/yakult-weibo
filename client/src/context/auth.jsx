@@ -83,7 +83,7 @@ class AuthProviderPure extends React.Component {
   async logout() {
     const { client } = this.props;
     localStorage.removeItem('token');
-    await client.resetStore();
+    client.resetStore();
     this.setState({
       user: null,
     });

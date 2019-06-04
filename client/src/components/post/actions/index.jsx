@@ -18,7 +18,7 @@ const replyto = (<span><i className="far fa-comment-dots" /> 5</span>);
 // ];
 
 export default id => ([
-  <span><Favourite id={id} /></span>,
+  <Favourite id={id} />,
   forward,
   replyto,
 ]);
