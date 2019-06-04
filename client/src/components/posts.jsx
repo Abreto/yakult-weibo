@@ -12,15 +12,15 @@ const GET_ALL_POSTS = gql`
   query Posts($onlyFollowed: Boolean!){
     posts(onlyFollowed: $onlyFollowed) {
       id
-      poster {
-        id
-        username
-      }
-      originator {
-        id username
-      }
-      content
-      createdAt
+      # poster {
+      #   id
+      #   username
+      # }
+      # originator {
+      #   id username
+      # }
+      # content
+      # createdAt
     }
   }
 `;
@@ -32,10 +32,20 @@ const PostsPure = ({ onlyFollowed }) => (
   >
     {({ loading, error, data }) => {
       if (loading) return <Spin />;
-      if (error) return <p>Failed to load posts.</p>;
+      if (error) {
+        return (
+          <p>
+            Failed to load posts.
+            With
+            {' '}
+            <code>onlyFollowed</code>
+            {'='}
+            {onlyFollowed}
+          </p>
+        );
+      }
 
-      console.log(data);
-      return data.posts.map(post => <Post {...post} />);
+      return data.posts.map(post => <Post key={post.id} id={post.id} />);
     }}
   </Query>
 );
