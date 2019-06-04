@@ -62,7 +62,7 @@ class RegisterModal extends React.Component {
       message.error('Please input valid username and password');
       return;
     }
-    
+
     const { client } = this.props;
     const { username, password } = this.state;
     const { data: { register } } = await client.mutate({
@@ -125,7 +125,8 @@ class RegisterModal extends React.Component {
             {({ login }) => (
               <Button
                 className="mr-sm-2"
-                onClick={async () => this.onRegister(login)}>
+                onClick={async () => this.onRegister(login)}
+              >
                 Register
               </Button>
             )}
@@ -139,6 +140,7 @@ class RegisterModal extends React.Component {
 RegisterModal.propTypes = {
   show: PropTypes.bool.isRequired,
   onHide: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   client: PropTypes.object.isRequired,
 };
 

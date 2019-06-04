@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Button } from 'react-bootstrap';
 import { Spin, List } from 'antd';
 
 import { Query } from 'react-apollo';
@@ -40,7 +41,7 @@ const PostsPure = ({ onlyFollowed }) => (
       return (
         <List
           bordered
-          header={<h2>Posts</h2>}
+          header={<Button>Posts</Button>}
           itemLayout="vertical"
           dataSource={posts}
           renderItem={post => <Post id={post.id} />}

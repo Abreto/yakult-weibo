@@ -19,6 +19,6 @@
         "react"
     ],
     "rules": {
-        "react/forbid-prop-types": [ false ]
+        // "react/forbid-prop-types": [ false ]
     }
 }
