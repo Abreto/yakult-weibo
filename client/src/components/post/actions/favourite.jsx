@@ -1,16 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Query } from 'react-apollo';
+import { Query, withApollo } from 'react-apollo';
 import { gql } from 'apollo-boost';
 
-import { message } from 'antd';
+import { Tooltip, message } from 'antd';
 
 import { AuthConsumer } from '../../../context/auth';
 
-class FavouriteActionLayer extends React.Component {
+const DO_LIKE = gql`
+  mutation Like($id: String!) {
+    star(id: $id)
+  }
+`;
+const UNDO_LIKE = gql`
+  mutation Dislike($id: String!) {
+    unstar(id: $id)
+  }
+`;
+class FavouriteActionLayerPure extends React.Component {
   async like() {
     /** do something about like */
+    const { client, id, refetch } = this.props;
+    const { data: { star } } = await client.mutate({
+      mutation: DO_LIKE,
+      variables: { id },
+    });
+    
+    if (!star) {
+      message.error('Failed to favourite it. Good luck next time!');
+    }
+
+    refetch();
   }
 
   async dislike() {
@@ -18,23 +39,34 @@ class FavouriteActionLayer extends React.Component {
   }
 
   render() {
-    const { children } = this.props;
+    const { type, children } = this.props;
+    const action = type ? (async () => this.dislike()) : (async () => this.like());
 
     return (
-      <span>
+      <span onClick={action}>
         {children}
       </span>
     );
   }
 }
-FavouriteActionLayer.propTypes = {
+FavouriteActionLayerPure.propTypes = {
   id: PropTypes.string.isRequired,
   type: PropTypes.bool.isRequired, // true for faved, false for unfaved
+  refetch: PropTypes.func.isRequired,
   children: PropTypes.object.isRequired,
 };
+const FavouriteActionLayer = withApollo(FavouriteActionLayerPure);
 
-const unfaved = (<i className="far fa-heart" />);
-const faved = (<i className="fas fa-heart" />);
+const unfaved = (
+  <Tooltip title="Favourite">
+    <i className="far fa-heart" />
+  </Tooltip>
+);
+const faved = (
+  <Tooltip title="Unfavourite">
+    <i className="fas fa-heart" />
+  </Tooltip>
+);
 
 const GET_FAV_STATUS = gql`
   query FavStatus($id: String!) {
@@ -55,7 +87,7 @@ class FavouritePure extends React.Component {
         variables={{ id }}
         fetchPolicy="no-cache"
       >
-        {({ loading, error, data }) => {
+        {({ loading, error, data, refetch }) => {
           if (loading) return unfaved;
           if (error) return unfaved;
 
@@ -63,7 +95,7 @@ class FavouritePure extends React.Component {
           const { isStarring } = data;
           const innerComponent = isStarring ? faved : unfaved;
           return (
-            <FavouriteActionLayer id={id} type={isStarring}>
+            <FavouriteActionLayer id={id} type={isStarring} refetch={refetch}>
               {innerComponent}
             </FavouriteActionLayer>
           );
