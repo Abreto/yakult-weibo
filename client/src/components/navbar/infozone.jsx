@@ -17,14 +17,15 @@ const Infozone = ({ username, refetch, client }) => {
       </Navbar.Text>
       <Button
         size="sm"
-        variant="primary"
+        variant="secondary"
         onClick={async () => {
           localStorage.removeItem('token');
           await client.resetStore();
           refetch();
         }}
       >
-        Sign out
+        <i className="fas fa-sign-out-alt" />
+        {/* Sign out */}
       </Button>
     </div>
   );
