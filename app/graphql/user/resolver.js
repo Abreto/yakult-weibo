@@ -78,7 +78,7 @@ module.exports = {
       }
     },
 
-    isStarring: async ({_, { id }, { logger, auth, model }) => {
+    isStarring: async (_, { id }, { logger, auth, model }) => {
       if (!auth) return false;
 
       try {
