@@ -1,3 +1,5 @@
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable react/no-multi-comp */
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -26,7 +28,7 @@ class FavouriteActionLayerPure extends React.Component {
       mutation: DO_LIKE,
       variables: { id },
     });
-    
+
     if (!star) {
       message.error('Failed to favourite it. Good luck next time!');
     } else {
@@ -65,6 +67,7 @@ FavouriteActionLayerPure.propTypes = {
   type: PropTypes.bool.isRequired, // true for faved, false for unfaved
   refetch: PropTypes.func.isRequired,
   children: PropTypes.object.isRequired,
+  client: PropTypes.object.isRequired,
 };
 const FavouriteActionLayer = withApollo(FavouriteActionLayerPure);
 
@@ -98,7 +101,6 @@ class FavouritePure extends React.Component {
           if (loading) return unfaved;
           if (error) return unfaved;
 
-          console.log(data);
           const { isStarring } = data;
           const innerComponent = isStarring ? faved : unfaved;
           return (
@@ -119,11 +121,15 @@ export default function Favourite({ id }) {
   return (
     <AuthConsumer>
       {({ user }) => {
-        if (!user) return (
-          <span onClick={() => message.error('Please sign in first!')}>
-            {unfaved}
-          </span>
-        );
+        if (!user) {
+          return (
+            <span
+              onClick={() => message.error('Please sign in first!')}
+            >
+              {unfaved}
+            </span>
+          );
+        }
         return <FavouritePure id={id} />;
       }}
     </AuthConsumer>

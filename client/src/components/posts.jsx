@@ -8,6 +8,7 @@ import { gql } from 'apollo-boost';
 
 import { AuthConsumer } from '../context/auth';
 import Post from './post';
+import { PostingBtn } from './posting';
 
 const GET_ALL_POSTS = gql`
   query Posts($onlyFollowed: Boolean!){
@@ -17,12 +18,28 @@ const GET_ALL_POSTS = gql`
   }
 `;
 
+const ListHeader = ({ refetch }) => (
+  <AuthConsumer>
+    {({ user }) => ((!user)
+      ? <h2>Posts</h2>
+      : <PostingBtn onPost={refetch} />)}
+  </AuthConsumer>
+);
+ListHeader.propTypes = {
+  refetch: PropTypes.func.isRequired,
+};
+
 const PostsPure = ({ onlyFollowed }) => (
   <Query
     query={GET_ALL_POSTS}
     variables={{ onlyFollowed }}
   >
-    {({ loading, error, data }) => {
+    {({
+      loading,
+      error,
+      data,
+      refetch,
+    }) => {
       if (loading) return <Spin />;
       if (error) {
         return (
@@ -41,7 +58,7 @@ const PostsPure = ({ onlyFollowed }) => (
       return (
         <List
           bordered
-          header={<Button>Whats Happening?</Button>}
+          header={<ListHeader refetch={refetch} />}
           itemLayout="vertical"
           dataSource={posts}
           renderItem={post => <Post id={post.id} />}

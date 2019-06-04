@@ -27,6 +27,7 @@ function Default() {
     <>
       {/* <h2>Posts</h2> */}
       <Posts />
+      <p>&nbsp;</p>
     </>
   );
 }

@@ -8,8 +8,8 @@ function NavUserzone() {
   return (
     <AuthConsumer>
       {({ user, login, logout }) => ((!user)
-          ? <Loginzone onSignIn={login} />
-          : <Infozone username={user.username} onSignOut={logout} />)}
+        ? <Loginzone onSignIn={login} />
+        : <Infozone username={user.username} onSignOut={logout} />)}
     </AuthConsumer>
   );
 }
