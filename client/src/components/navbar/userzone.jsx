@@ -7,12 +7,9 @@ import Infozone from './infozone';
 function NavUserzone() {
   return (
     <AuthConsumer>
-      {({ user, login, logout }) => {
-        console.log('userzoneupdated with ', user);
-        return (!user)
+      {({ user, login, logout }) => ((!user)
           ? <Loginzone onSignIn={login} />
-          : <Infozone username={user.username} onSignOut={logout} />;
-      }}
+          : <Infozone username={user.username} onSignOut={logout} />)}
     </AuthConsumer>
   );
 }
