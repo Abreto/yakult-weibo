@@ -85,10 +85,6 @@ const GET_FAV_STATUS = gql`
   }
 `;
 class FavouritePure extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
   render() {
     const { id } = this.props;
 
