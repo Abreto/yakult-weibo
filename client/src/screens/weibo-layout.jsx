@@ -8,7 +8,7 @@ import Navigator from '../components/navbar/index';
 import NoticeAlert from '../components/notice-alert';
 
 import './weibo-layout.css';
-import Post from '../components/post/index';
+import Posts from '../components/posts';
 
 message.config({
   top: 60,
@@ -25,8 +25,8 @@ function Profile() {
 function Default() {
   return (
     <>
-      <h2>Default</h2>
-      <Post />
+      <h2>Posts</h2>
+      <Posts />
     </>
   );
 }
