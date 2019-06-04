@@ -27,7 +27,7 @@ module.exports = {
       if (!auth) return false;
 
       try {
-        const res = await model.fav.countDocument({
+        const res = await model.fav.countDocuments({
           user: auth.id,
           post: id,
         });
