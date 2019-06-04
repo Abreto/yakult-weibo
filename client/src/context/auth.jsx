@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { withApollo } from 'react-apollo';
 import { gql } from 'apollo-boost';
 
+import { message } from 'antd';
+
 const AuthContext = React.createContext({
   user: null,
   login: () => {},
@@ -70,10 +72,11 @@ class AuthProviderPure extends React.Component {
 
     if (!user) {
       /** failed login */
-      alert('Failed to sign in: Invalid login');
+      message.error('Failed to sign in: Invalid login');
     } else {
       localStorage.setItem('token', header);
       await this.updateUser(user);
+      message.success('Signed in!');
     }
   }
 
@@ -84,6 +87,7 @@ class AuthProviderPure extends React.Component {
     this.setState({
       user: null,
     });
+    message.success('Signed out!');
   }
 
   render() {
