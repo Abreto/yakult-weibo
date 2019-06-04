@@ -1,7 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Navbar, Button } from 'react-bootstrap';
+import {
+  Navbar,
+  Button,
+  OverlayTrigger,
+  Tooltip,
+} from 'react-bootstrap';
 
 const Infozone = ({ username, onSignOut }) => {
   let hide = false;
@@ -14,14 +19,21 @@ const Infozone = ({ username, onSignOut }) => {
         {' '}
         {username}
       </Navbar.Text>
-      <Button
-        size="sm"
-        variant="secondary"
-        onClick={onSignOut}
+      <OverlayTrigger
+        placement="bottom"
+        overlay={
+          <Tooltip>Sign out</Tooltip>
+        }
       >
-        <i className="fas fa-sign-out-alt" />
-        {/* Sign out */}
-      </Button>
+        <Button
+          size="sm"
+          variant="secondary"
+          onClick={onSignOut}
+        >
+          <i className="fas fa-sign-out-alt" />
+          {/* Sign out */}
+        </Button>
+      </OverlayTrigger>
     </div>
   );
 };

@@ -10,7 +10,7 @@ function Level({ poster, createdAt, content, children }) {
   return (
     <Comment
       // actions={[<span>Forward</span>, <span>Reply to</span>]}
-      actions={[<span className="mr-sm-2"><i className="fas fa-retweet" /></span>, <span><i className="far fa-comment-dots" /></span>]}
+      actions={[<span className="mr-sm-2"><i className="fas fa-heart" /></span>, <span className="mr-sm-2"><i className="fas fa-retweet" /></span>, <span><i className="far fa-comment-dots" /></span>]}
       author={<span>{poster.username}</span>}
       avatar={<Avatar id={poster.id} />}
       datetime={
