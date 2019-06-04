@@ -29,13 +29,24 @@ class FavouriteActionLayerPure extends React.Component {
     
     if (!star) {
       message.error('Failed to favourite it. Good luck next time!');
+    } else {
+      refetch();
     }
-
-    refetch();
   }
 
   async dislike() {
     /** do something about dislike */
+    const { client, id, refetch } = this.props;
+    const { data: { unstar } } = await client.mutate({
+      mutation: UNDO_LIKE,
+      variables: { id },
+    });
+
+    if (!unstar) {
+      message.error('Failed to favourite it. Good luck next time!');
+    } else {
+      refetch();
+    }
   }
 
   render() {
