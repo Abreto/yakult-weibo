@@ -1,10 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Navbar, Button } from 'react-bootstrap';
 
-import { withApollo } from 'react-apollo';
-
-const Infozone = ({ username, refetch, client }) => {
+const Infozone = ({ username, onSignOut }) => {
   let hide = false;
   if (!username) hide = true;
 
@@ -18,11 +17,7 @@ const Infozone = ({ username, refetch, client }) => {
       <Button
         size="sm"
         variant="secondary"
-        onClick={async () => {
-          localStorage.removeItem('token');
-          await client.resetStore();
-          refetch();
-        }}
+        onClick={onSignOut}
       >
         <i className="fas fa-sign-out-alt" />
         {/* Sign out */}
@@ -30,5 +25,9 @@ const Infozone = ({ username, refetch, client }) => {
     </div>
   );
 };
+Infozone.propTypes = {
+  username: PropTypes.string.isRequired,
+  onSignOut: PropTypes.func.isRequired,
+};
 
-export default withApollo(Infozone);
+export default Infozone;

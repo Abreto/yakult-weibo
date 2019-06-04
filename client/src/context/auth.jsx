@@ -9,6 +9,16 @@ const AuthContext = React.createContext({
   logout: () => {},
 });
 
+const GET_USER = gql`
+  {
+    user {
+      id
+      username
+      usertype
+    }
+  }
+`;
+
 class AuthProviderPure extends React.Component {
   constructor(props) {
     super(props);
@@ -18,6 +28,29 @@ class AuthProviderPure extends React.Component {
       login: async (...args) => this.login(...args),
       logout: async () => this.logout(),
     };
+
+    this.initialize();
+  }
+
+  async updateUser(user) {
+    await this.setState({
+      user: {
+        id: user.id,
+        username: user.username,
+        usertype: user.usertype,
+      }
+    });
+  }
+
+  async initialize() {
+    const { client } = this.props;
+    const { data: { user } } = await client.query({
+      query: GET_USER,
+    });
+
+    if (user) {
+      await this.updateUser(user);
+    }
   }
 
   async login(username, password) {
@@ -26,15 +59,7 @@ class AuthProviderPure extends React.Component {
     const header = `Basic ${token}`;
 
     const { data: { user } } = await client.query({
-      query: gql`
-        {
-          user {
-            id
-            username
-            usertype
-          }
-        }
-      `,
+      query: GET_USER,
       fetchPolicy: 'network-only',
       context: {
         headers: {
@@ -47,13 +72,7 @@ class AuthProviderPure extends React.Component {
       /** failed login */
     } else {
       localStorage.setItem('token', header);
-      this.setState({
-        user: {
-          id: user.id,
-          username: user.username,
-          usertype: user.usertype,
-        }
-      });
+      await this.updateUser(user);
     }
   }
 

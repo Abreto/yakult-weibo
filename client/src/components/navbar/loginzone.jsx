@@ -1,10 +1,7 @@
 import React from 'react';
-
-import { withApollo } from 'react-apollo';
-import { gql } from 'apollo-boost';
+import PropTypes from 'prop-types';
 
 import {
-  Form,
   InputGroup,
   Button,
 } from 'react-bootstrap';
@@ -23,27 +20,9 @@ class NavLoginzone extends React.Component {
   }
 
   async handleSignIn() {
+    const { onSignIn } = this.props;
     const { username, password } = this.state;
-    const { client, refetch } = this.props;
-    const token = btoa(`${username}:${password}`);
-    const header = `Basic ${token}`;
-    const { data: { user } } = await client.query({
-      query: gql`{ user { username } }`,
-      fetchPolicy: 'network-only',
-      context: {
-        headers: {
-          Authorization: header,
-        },
-      },
-    });
-
-    if (user !== null) {
-      localStorage.setItem('token', header);
-
-      refetch();
-    } else {
-      alert('Incorrect password or nonexisting user');
-    }
+    await onSignIn(username, password);
   }
 
   showRegisterModal() {
@@ -89,7 +68,7 @@ class NavLoginzone extends React.Component {
             size="sm"
             variant="primary"
             className="mr-sm-2"
-            onClick={() => this.handleSignIn()}
+            onClick={async () => this.handleSignIn()}
           >
             Sign in
           </Button>
@@ -110,5 +89,8 @@ class NavLoginzone extends React.Component {
     );
   }
 }
+NavLoginzone.propTypes = {
+  onSignIn: PropTypes.func.isRequired,
+};
 
-export default withApollo(NavLoginzone);
+export default NavLoginzone;
