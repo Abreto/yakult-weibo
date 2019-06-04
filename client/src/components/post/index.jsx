@@ -37,7 +37,7 @@ function Post({ id }) {
         }
 
         const { post } = data;
-        return <PostPure {...post} />;
+        return <PostPure id={id} {...post} />;
       }}
     </Query>
   );
