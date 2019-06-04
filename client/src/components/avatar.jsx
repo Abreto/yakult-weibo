@@ -25,8 +25,8 @@ const YWAvatar = (props) => {
   delete passProps.id;
   return (
     <Avatar
-      src={url(id)}
       {...passProps}
+      src={url(id)}
     />
   );
 };
