@@ -34,7 +34,6 @@ function Default() {
 const WeiboLayout = () => (
   <>
     <Navigator />
-    {/* <TToas /> */}
     <Container>
       <NoticeAlert />
       <Switch>
