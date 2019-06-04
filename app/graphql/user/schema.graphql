@@ -42,4 +42,5 @@ extend type Mutation {
   unfollow(id: String!): Boolean!
 
   star(id: String!): Boolean!
+  unstar(id: String!): Boolean!
 }

@@ -27,7 +27,7 @@ module.exports = {
             },
           });
         }
-        return await query;
+        return await query.sort('-createdAt');
       } catch (e) {
         logger.warn(e);
         return [];

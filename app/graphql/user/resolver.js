@@ -94,6 +94,23 @@ module.exports = {
         return false;
       }
     },
+
+    unstar: async (_, { id }, {
+      logger, auth, model, checkPermission,
+    }) => {
+      checkPermission('MEMBER');
+
+      try {
+        const res = await model.fav.remove({
+          user: auth.id,
+          post: id,
+        });
+        return (res.deletedCount > 0);
+      } catch (e) {
+        logger.warn(e);
+        return false;
+      }
+    },
   },
 
   User: {
