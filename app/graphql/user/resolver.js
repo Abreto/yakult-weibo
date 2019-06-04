@@ -78,6 +78,21 @@ module.exports = {
       }
     },
 
+    isStarring: async ({_, { id }, { logger, auth, model }) => {
+      if (!auth) return false;
+
+      try {
+        const res = await model.fav.countDocument({
+          user: auth.id,
+          post: id,
+        });
+        return (res > 0);
+      } catch (e) {
+        logger.warn(e);
+        return false;
+      }
+    },
+
     star: async (_, { id }, {
       logger, auth, model, checkPermission,
     }) => {
