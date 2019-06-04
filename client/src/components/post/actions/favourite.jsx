@@ -18,12 +18,18 @@ class FavouriteActionLayer extends React.Component {
   }
 
   render() {
-    return null;
+    const { children } = this.props;
+
+    return (
+      <span>
+        {children}
+      </span>
+    );
   }
 }
 FavouriteActionLayer.propTypes = {
   id: PropTypes.string.isRequired,
-  dir: PropTypes.bool.isRequired, // true for fav, false for unfav
+  type: PropTypes.bool.isRequired, // true for faved, false for unfaved
   children: PropTypes.object.isRequired,
 };
 
@@ -31,10 +37,8 @@ const unfaved = (<i className="far fa-heart" />);
 const faved = (<i className="fas fa-heart" />);
 
 const GET_FAV_STATUS = gql`
-  {
-    user {
-      favourites { id }
-    }
+  query FavStatus($id: String!) {
+    isStarring(id: $id)
   }
 `;
 class FavouritePure extends React.Component {
@@ -43,9 +47,12 @@ class FavouritePure extends React.Component {
   }
 
   render() {
+    const { id } = this.props;
+
     return (
       <Query
         query={GET_FAV_STATUS}
+        variables={{ id }}
         fetchPolicy="no-cache"
       >
         {({ loading, error, data }) => {
@@ -53,7 +60,13 @@ class FavouritePure extends React.Component {
           if (error) return unfaved;
 
           console.log(data);
-          return unfaved;
+          const { isStarring } = data;
+          const innerComponent = isStarring ? faved : unfaved;
+          return (
+            <FavouriteActionLayer id={id} type={isStarring}>
+              {innerComponent}
+            </FavouriteActionLayer>
+          );
         }}
       </Query>
     );
