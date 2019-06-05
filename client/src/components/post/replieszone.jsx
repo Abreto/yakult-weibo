@@ -86,7 +86,7 @@ class ReplyToFormPure extends React.Component {
               })}
             />
           </Form.Group>
-          <Form.Group as={Col} xs="1">
+          <Form.Group as={Col} xs="auto">
             <AuthConsumer>
               {({ user }) => ((!user)
                 ? (<Button onClick={() => message.error('Please sign in first')}>Reply</Button>)

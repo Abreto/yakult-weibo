@@ -14,7 +14,7 @@ const Infozone = ({ username, onSignOut }) => {
 
   return (
     <span hidden={hide}>
-      <Navbar.Text className="mr-sm-2">
+      <Navbar.Text className="mr-2">
         Hello,
         {' '}
         {username}

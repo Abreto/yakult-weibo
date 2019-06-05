@@ -5,6 +5,8 @@ import {
   Form,
   InputGroup,
   Button,
+  Row,
+  Col,
 } from 'react-bootstrap';
 
 import RegisterModal from '../register-modal';
@@ -44,8 +46,8 @@ class NavLoginzone extends React.Component {
 
     return (
       <>
-        <Form inline>
-          <InputGroup className="mr-sm-2">
+        <Form inline as={Row} noGutters>
+          <InputGroup as={Col} xs className="mr-2">
             <Form.Control
               type="text"
               size="sm"
@@ -65,22 +67,26 @@ class NavLoginzone extends React.Component {
               })}
             />
           </InputGroup>
-          <Button
-            size="sm"
-            variant="primary"
-            className="mr-sm-2"
-            onClick={async () => this.handleSignIn()}
-          >
-            Sign in
-          </Button>
-          <Button
-            size="sm"
-            variant="success"
-            className="mr-sm-2"
-            onClick={() => this.showRegisterModal()}
-          >
-            Sign up
-          </Button>
+          <Col xs="auto">
+            <Button
+              size="sm"
+              variant="primary"
+              className="mr-2"
+              onClick={async () => this.handleSignIn()}
+            >
+              Sign in
+            </Button>
+          </Col>
+          <Col xs="auto">
+            <Button
+              size="sm"
+              variant="success"
+              // className="mr-sm-2"
+              onClick={() => this.showRegisterModal()}
+            >
+              Sign up
+            </Button>
+          </Col>
         </Form>
         <RegisterModal
           show={registerModalShow}

@@ -134,14 +134,16 @@ class Posts extends React.Component {
 
   render() {
     return (
-      <AuthConsumer>
-        {({ user }) => {
-          if (!user) return <PostsPure onlyFollowed={false} onlyFavourites={false} />;
+      <div className="mb-2">
+        <AuthConsumer>
+          {({ user }) => {
+            if (!user) return <PostsPure onlyFollowed={false} onlyFavourites={false} />;
 
-          const { onlyFollowed, onlyFavourites } = this.state;
-          return <PostsPure onlyFollowed={onlyFollowed} onlyFavourites={onlyFavourites} />;
-        }}
-      </AuthConsumer>
+            const { onlyFollowed, onlyFavourites } = this.state;
+            return <PostsPure onlyFollowed={onlyFollowed} onlyFavourites={onlyFavourites} />;
+          }}
+        </AuthConsumer>
+      </div>
     );
   }
 }

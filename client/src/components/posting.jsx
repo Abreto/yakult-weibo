@@ -83,7 +83,7 @@ class PostingModalPure extends React.Component {
         <Modal.Body>
           <Form>
             <Form.Row>
-              <Form.Group as={Col} xs="1">
+              <Form.Group as={Col} xs="auto">
                 <MyAvatar />
               </Form.Group>
 
