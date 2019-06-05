@@ -181,7 +181,7 @@ const RepliesPanel = ({ id, show }) => (
 
 const RepliesPanelWrapper = ({ id, show }) => (
   <div hidden={!show}>
-    <RepliesPanel id={{ id }} show={show} />
+    <RepliesPanel id={id} show={show} />
   </div>
 );
 
