@@ -8,12 +8,12 @@ import BindActions from './actions';
 import Avatar from '../avatar';
 
 function PostPure({
-  id, poster, createdAt, content, originator
+  id, poster, createdAt, content, originator, refetch,
 }) {
   return (
     <List.Item
       key={id}
-      actions={BindActions(id)}
+      actions={BindActions(id, refetch)}
       extra={originator ? `from ${originator.username}` : null}
     >
       <List.Item.Meta

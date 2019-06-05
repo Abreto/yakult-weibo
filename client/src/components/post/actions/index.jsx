@@ -6,8 +6,7 @@ import React from 'react';
 // className="mr-sm-2"
 
 import Favourite from './favourite';
-
-const forward = (<span><i className="fas fa-retweet" /></span>);
+import Forward from './forward';
 
 const replyto = (<span><i className="far fa-comment-dots" /> 5</span>);
 
@@ -17,8 +16,8 @@ const replyto = (<span><i className="far fa-comment-dots" /> 5</span>);
 //   'Reply to'
 // ];
 
-export default id => ([
+export default (id, refetch) => ([
   <Favourite id={id} />,
-  forward,
+  <Forward id={id} refetch={refetch} />,
   replyto,
 ]);

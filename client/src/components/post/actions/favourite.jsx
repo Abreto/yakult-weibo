@@ -134,4 +134,4 @@ export default function Favourite({ id }) {
       }}
     </AuthConsumer>
   );
-};
+}

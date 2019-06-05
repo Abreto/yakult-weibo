@@ -18,7 +18,7 @@ const GET_POST = gql`
   }
 `;
 
-function Post({ id }) {
+function Post({ id, refetch }) {
   return (
     <Query
       query={GET_POST}
@@ -37,7 +37,7 @@ function Post({ id }) {
         }
 
         const { post } = data;
-        return <PostPure id={id} {...post} />;
+        return <PostPure id={id} refetch={refetch} {...post} />;
       }}
     </Query>
   );
