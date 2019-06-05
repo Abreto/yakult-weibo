@@ -33,6 +33,15 @@ module.exports = {
         return [];
       }
     },
+
+    search: async (_, { contain }, { logger, model }) => {
+      try {
+        return await model.post.find({ content: new RegExp(contain.replace(' ', '|'), 'iu') });
+      } catch (e) {
+        logger.warn(e);
+        return [];
+      }
+    },
   },
   Mutation: {
     post: async (_, { content }, {

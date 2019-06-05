@@ -9,7 +9,8 @@ type Post {
 
 extend type Query {
   post(id: String!): Post
-  posts(onlyFollowed: Boolean): [Post]
+  posts(onlyFollowed: Boolean): [Post]!
+  search(contain: String!): [Post]!
 }
 
 extend type Mutation {
