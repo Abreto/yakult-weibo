@@ -123,6 +123,16 @@ const FollowLayer = ({ id, children }) => (
         );
       }
 
+      if (id === user.id) {
+        return (
+          <span>
+            {children}
+            {' '}
+            (you)
+          </span>
+        );
+      }
+
       return <FollowLayerWhenSignedIn id={id} show={children} />
     }}
   </AuthConsumer>
