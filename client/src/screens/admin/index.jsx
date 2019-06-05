@@ -17,7 +17,7 @@ import SettingsPanel from './settings';
 import UserManagerPanel from './usermanager';
 
 const RealAdminPanel = () => (
-  <Tab.Container id="personal-home-tabs" defaultActiveKey="#admin-tabs-users">
+  <Tab.Container id="personal-home-tabs" defaultActiveKey="#admin-tabs-settings">
     <Row>
       <Col sm={9}>
         <Tab.Content>

@@ -88,7 +88,7 @@ class PostPure extends React.Component {
 }
 PostPure.propTypes = {
   id: PropTypes.string.isRequired,
-  poster: PropTypes.object.isRequired,
+  poster: PropTypes.object, // can be null for deleted account
   createdAt: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
 };
