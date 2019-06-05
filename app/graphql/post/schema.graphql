@@ -1,7 +1,7 @@
 
 type Post {
   id: String!
-  poster: User!
+  poster: User
   content: String!
   originator: User
   createdAt: String!
