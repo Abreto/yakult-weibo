@@ -41,7 +41,24 @@ class ReplyToFormPure extends React.Component {
       return;
     }
 
-    const { client } = this.props;
+    const { client, id, postReply } = this.props;
+    const { content } = this.state;
+    const { data: { reply } } = await client.mutate({
+      mutation: REPLY_ACTION,
+      variables: {
+        to: id,
+        content,
+      },
+    });
+
+    if (!reply) {
+      message.error('Sooory, fail to reply it.');
+    } else {
+      postReply();
+      this.setState({
+        content: '',
+      });
+    }
   }
 
   validate() {
@@ -54,6 +71,7 @@ class ReplyToFormPure extends React.Component {
   }
 
   render() {
+    const { content } = this.state;
     return (
       <Form>
         <Form.Row>
@@ -61,10 +79,14 @@ class ReplyToFormPure extends React.Component {
             <Form.Control
               as="input"
               placeholder="Your comment here"
+              value={content}
+              onChange={e => this.setState({
+                content: e.target.value,
+              })}
             />
           </Form.Group>
           <Form.Group as={Col} xs="1">
-            <Button>Reply</Button>
+            <Button onClick={() => this.reply()}>Reply</Button>
           </Form.Group>
         </Form.Row>
       </Form>
@@ -103,7 +125,7 @@ const RepliesPanelPure = ({
     <Divider orientation="left">Replies</Divider>
     <List
       itemLayout="horizontal"
-      header={<ReplyToForm id={id} postReplied={refetch} />}
+      header={<ReplyToForm id={id} postReply={refetch} />}
       dataSource={dataSource}
       renderItem={reply => <ReplyItem key={reply.id} {...reply} />}
     />
@@ -129,12 +151,24 @@ const RepliesPanel = ({ id, show }) => (
     variables={{ to: id }}
     fetchPolicy="no-cache"
   >
-    {({ loading, error, data }) => {
+    {({
+      loading,
+      error,
+      data,
+      refetch,
+    }) => {
       if (loading) return <Spin />;
       if (error) return <Alert show={show} variant="danger">Failed to load replies.</Alert>;
 
       const { replies } = data;
-      return <RepliesPanelPure id={id} show={show} dataSource={replies} />;
+      return (
+        <RepliesPanelPure
+          id={id}
+          show={show}
+          dataSource={replies}
+          refetch={refetch}
+        />
+      );
     }}
   </Query>
 );
