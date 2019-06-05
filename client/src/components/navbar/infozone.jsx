@@ -13,11 +13,12 @@ const Infozone = ({ username, onSignOut }) => {
   if (!username) hide = true;
 
   return (
-    <div hidden={hide}>
+    <span hidden={hide}>
       <Navbar.Text className="mr-sm-2">
         Hello,
         {' '}
         {username}
+        {' '}
       </Navbar.Text>
       <OverlayTrigger
         placement="bottom"
@@ -34,7 +35,7 @@ const Infozone = ({ username, onSignOut }) => {
           {/* Sign out */}
         </Button>
       </OverlayTrigger>
-    </div>
+    </span>
   );
 };
 Infozone.propTypes = {

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Spin, List, Skeleton } from 'antd';
+import { List, Skeleton } from 'antd';
 
 import { Query } from 'react-apollo';
 import { gql } from 'apollo-boost';
