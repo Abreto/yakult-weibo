@@ -4,8 +4,14 @@ import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
 import { gql } from 'apollo-boost';
 
-import { Spin } from 'antd';
+import { List, Skeleton } from 'antd';
 import PostPure from './post-pure';
+
+const ListSkeleton = () => (
+  <List.Item>
+    <Skeleton active avatar />
+  </List.Item>
+);
 
 const GET_POST = gql`
   query Post($id: String!) {
@@ -25,7 +31,7 @@ function Post({ id, refetch }) {
       variables={{ id }}
     >
       {({ loading, error, data }) => {
-        if (loading) return <Spin />;
+        if (loading) return <ListSkeleton />;
         if (error) {
           return (
             <p>

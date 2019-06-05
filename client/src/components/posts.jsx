@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Spin, List } from 'antd';
+import { Spin, List, Skeleton } from 'antd';
 
 import { Query } from 'react-apollo';
 import { gql } from 'apollo-boost';
@@ -48,6 +48,8 @@ const PostsPureReally = ({ posts, showheader = true, refetch }) => (
   />
 );
 
+const postSkeleton = <Skeleton active paragraph={{ rows: 8 }} />;
+
 const PostsPureOnlyFavourites = () => (
   <Query
     query={GET_FAVOURITES_POSTS}
@@ -58,7 +60,7 @@ const PostsPureOnlyFavourites = () => (
       data,
       refetch,
     }) => {
-      if (loading) return <Spin />;
+      if (loading) return postSkeleton;
       if (error) {
         return (
           <p>
@@ -86,7 +88,7 @@ const PostsPureWithoutOnlyFavourites = ({ onlyFollowed }) => (
       data,
       refetch,
     }) => {
-      if (loading) return <Spin />;
+      if (loading) return postSkeleton;
       if (error) {
         return (
           <p>

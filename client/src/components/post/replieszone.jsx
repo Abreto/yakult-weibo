@@ -16,6 +16,7 @@ import {
   Tooltip,
   Spin,
   message,
+  Skeleton,
 } from 'antd';
 
 import { AuthConsumer } from '../../context/auth';
@@ -162,7 +163,7 @@ const RepliesPanel = ({ id, show }) => (
       data,
       refetch,
     }) => {
-      if (loading) return <span show={show}><Spin /></span>;
+      if (loading) return <Skeleton active />;
       if (error) return <Alert show={show} variant="danger">Failed to load replies.</Alert>;
 
       const { replies } = data;
@@ -178,4 +179,10 @@ const RepliesPanel = ({ id, show }) => (
   </Query>
 );
 
-export default RepliesPanel;
+const RepliesPanelWrapper = ({ id, show }) => (
+  <div hidden={!show}>
+    <RepliesPanel id={{ id }} show={show} />
+  </div>
+);
+
+export default RepliesPanelWrapper;
