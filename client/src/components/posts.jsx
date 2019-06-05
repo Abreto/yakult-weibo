@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'react-bootstrap';
 import { Spin, List } from 'antd';
 
 import { Query } from 'react-apollo';

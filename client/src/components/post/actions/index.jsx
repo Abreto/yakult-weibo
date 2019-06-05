@@ -7,8 +7,7 @@ import React from 'react';
 
 import Favourite from './favourite';
 import Forward from './forward';
-
-const replyto = (<span><i className="far fa-comment-dots" /> 5</span>);
+import ReplyTo from './replyto';
 
 // const descriptions = [
 //   'Favourite',
@@ -19,5 +18,5 @@ const replyto = (<span><i className="far fa-comment-dots" /> 5</span>);
 export default (id, refetch) => ([
   <Favourite id={id} />,
   <Forward id={id} refetch={refetch} />,
-  replyto,
+  <ReplyTo id={id} />,
 ]);
