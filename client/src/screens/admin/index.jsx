@@ -13,13 +13,15 @@ import {
 
 import { AuthConsumer } from '../../context/auth';
 
+import SettingsPanel from './settings';
+
 const RealAdminPanel = () => (
   <Tab.Container id="personal-home-tabs" defaultActiveKey="#admin-tabs-settings">
     <Row>
       <Col sm={9}>
         <Tab.Content>
           <Tab.Pane eventKey="#admin-tabs-settings">
-            <p>settings</p>
+            <SettingsPanel />
           </Tab.Pane>
           <Tab.Pane eventKey="#admin-tabs-users">
             <p>users</p>
