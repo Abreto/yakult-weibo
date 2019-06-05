@@ -162,7 +162,7 @@ const RepliesPanel = ({ id, show }) => (
       data,
       refetch,
     }) => {
-      if (loading) return <Spin />;
+      if (loading) return <span show={show}><Spin /></span>;
       if (error) return <Alert show={show} variant="danger">Failed to load replies.</Alert>;
 
       const { replies } = data;
