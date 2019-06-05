@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
@@ -6,6 +7,7 @@ import { List, Tooltip } from 'antd';
 
 import BindActions from './actions';
 import Avatar from '../avatar';
+import RepliesPanel from './replieszone';
 
 function PostPure({
   id, poster, createdAt, content, originator, refetch,
@@ -25,20 +27,8 @@ function PostPure({
           </Tooltip>
         )}
       />
-      <p>{content}</p>
-      {/* <Comment
-        actions={BindActions(id)}
-        author={<span>{poster.username}</span>}
-        avatar={<Avatar id={poster.id} />}
-        datetime={(
-          <Tooltip title={moment(parseInt(createdAt, 10)).format('YYYY-MM-DD HH:mm:ss')}>
-            <span>{moment(parseInt(createdAt, 10)).fromNow()}</span>
-          </Tooltip>
-        )}
-        content={<p>{content}</p>}
-      >
-        {children}
-      </Comment> */}
+      <div>{content}</div>
+      <RepliesPanel id={id} />
     </List.Item>
   );
 }

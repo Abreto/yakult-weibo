@@ -60,7 +60,7 @@ const PostsPure = ({ onlyFollowed }) => (
           header={<ListHeader refetch={refetch} />}
           itemLayout="vertical"
           dataSource={posts}
-          renderItem={post => <Post id={post.id} refetch={refetch} />}
+          renderItem={post => <Post key={post.id} id={post.id} refetch={refetch} />}
         />
       );
     }}
