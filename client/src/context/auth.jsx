@@ -21,12 +21,30 @@ const GET_USER = gql`
   }
 `;
 
+async function clearLocalStorage() {
+  const itemsToRemove = [
+    'lastLogged',
+    'lastId',
+    'lastUsername',
+    'lastUsertype',
+  ];
+  itemsToRemove.forEach(key => localStorage.removeItem(key));
+}
+
 class AuthProviderPure extends React.Component {
   constructor(props) {
     super(props);
 
+    let defaultUser = null;
+    if (localStorage.getItem('lastLogged') === 'true') {
+      defaultUser = {
+        id: localStorage.getItem('lastId'),
+        username: localStorage.getItem('lastUsername'),
+        usertype: localStorage.getItem('lastUsertype'),
+      };
+    }
     this.state = {
-      user: null,
+      user: defaultUser,
       login: async (...args) => this.login(...args),
       logout: async () => this.logout(),
     };
@@ -34,14 +52,35 @@ class AuthProviderPure extends React.Component {
     this.initialize();
   }
 
+  async saveToLocalStorage() {
+    const { user } = this.state;
+    if (user !== null) {
+      const { id, username, usertype } = user;
+      localStorage.setItem('lastLogged', 'true');
+      localStorage.setItem('lastId', id);
+      localStorage.setItem('lastUsername', username);
+      localStorage.setItem('lastUsertype', usertype);
+    }
+  }
+
   async updateUser(user) {
-    await this.setState({
+    this.setState({
       user: {
         id: user.id,
         username: user.username,
         usertype: user.usertype,
-      }
+      },
+    }, () => {
+      this.saveToLocalStorage();
     });
+  }
+
+  shouldUserUpdate(newUser) {
+    const { user } = this.state;
+    if (!user) return true;
+
+    const comparsingKeys = ['id', 'username', 'usertype'];
+    return comparsingKeys.some(val => (user[val] !== newUser[val]));
   }
 
   async initialize() {
@@ -50,8 +89,8 @@ class AuthProviderPure extends React.Component {
       query: GET_USER,
     });
 
-    if (user) {
-      await this.updateUser(user);
+    if (user && this.shouldUserUpdate(user)) {
+      this.updateUser(user);
     }
   }
 
@@ -75,7 +114,7 @@ class AuthProviderPure extends React.Component {
       message.error('Failed to sign in: Invalid login');
     } else {
       localStorage.setItem('token', header);
-      await this.updateUser(user);
+      this.updateUser(user);
       message.success('Signed in!');
     }
   }
@@ -87,6 +126,7 @@ class AuthProviderPure extends React.Component {
     this.setState({
       user: null,
     });
+    clearLocalStorage();
     message.success('Signed out!');
   }
 
