@@ -2,7 +2,7 @@
 import React from 'react';
 import _ from 'lodash';
 
-import { Query, withApollo } from 'react-apollo';
+import { withApollo } from 'react-apollo';
 import { gql } from 'apollo-boost';
 
 import {
