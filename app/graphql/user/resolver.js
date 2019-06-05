@@ -21,6 +21,15 @@ module.exports = {
       }
     },
 
+    allusers: async (_, params, { logger, model }) => {
+      try {
+        return await model.user.find({});
+      } catch (e) {
+        logger.warn(e);
+        return [];
+      }
+    },
+
     whoami: (_, params, { auth }) => auth,
 
     isStarring: async (_, { id }, { logger, auth, model }) => {
@@ -67,6 +76,7 @@ module.exports = {
     removeUser: async (_, { id }, { logger, model }) => {
       try {
         if (id === undefined) return false;
+        if (id === null) return false;
         const res = await model.user.remove({ id });
         return (res.deletedCount > 0);
       } catch (e) {

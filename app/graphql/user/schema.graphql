@@ -28,6 +28,8 @@ extend type Query {
 
   userByName(username: String!): User
 
+  allusers: [User]!
+
   whoami: User
 
   isStarring(id: String!): Boolean!
