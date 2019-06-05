@@ -48,10 +48,16 @@ module.exports = {
   Mutation: {
     register: async (_, { form }, { logger, model }) => {
       try {
-        return await model.user.create({
+        const me = await model.user.create({
           username: form.username,
           password: form.password,
         });
+
+        // make I follow me for convience
+        me.following.push(me.id);
+        await me.save();
+
+        return me;
       } catch (e) {
         logger.warn(e);
         return null;
