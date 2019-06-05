@@ -153,7 +153,12 @@ const GET_USER = gql`
     }
   }
 `;
-const Username = ({ id, username }) => {
+const Username = ({ user }) => {
+  if (!user) {
+    return <span>Deleted Account</span>;
+  }
+
+  const { id, username } = user;
   if (!username) {
     return (
       <Query
@@ -164,8 +169,7 @@ const Username = ({ id, username }) => {
           if (loading) return <Spin />;
           if (error) return <span>Aho</span>;
 
-          const gotUsername = data.username;
-          return <UsernamePure id={id} username={gotUsername} />;
+          return <UsernamePure id={id} username={data.user.username} />;
         }}
       </Query>
     );

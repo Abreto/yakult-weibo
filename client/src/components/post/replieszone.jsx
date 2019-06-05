@@ -104,8 +104,8 @@ const ReplyItem = ({ poster, content, createdAt }) => (
   <List.Item>
     <List.Item.Meta
       style={{ maxWidth: 160 }}
-      avatar={<Avatar id={poster.id} />}
-      title={<Username id={poster.id} username={poster.username} />}
+      avatar={<Avatar user={poster} />}
+      title={<Username user={poster} />}
       description={(
         <Tooltip title={moment(parseInt(createdAt, 10)).format('YYYY-MM-DD HH:mm:ss')}>
           <span>{moment(parseInt(createdAt, 10)).fromNow()}</span>

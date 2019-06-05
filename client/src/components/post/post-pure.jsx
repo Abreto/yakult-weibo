@@ -45,7 +45,7 @@ class PostPure extends React.Component {
     } = this.state;
 
     const titleComponent = (
-      <Username id={poster.id} username={poster.username} />
+      <Username user={poster} />
     );
 
     return (
@@ -57,7 +57,7 @@ class PostPure extends React.Component {
         })}
       >
         <List.Item.Meta
-          avatar={<Avatar id={poster.id} />}
+          avatar={<Avatar user={poster} />}
           title={titleComponent}
           description={(
             <>
@@ -69,7 +69,7 @@ class PostPure extends React.Component {
                   {' ('}
                   forwarded from
                   {' '}
-                  <Username id={originator.id} username={originator.username} />
+                  <Username user={originator} />
                   {')'}
                 </span>
               ) : null}

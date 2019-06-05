@@ -34,4 +34,20 @@ YWAvatar.propTypes = {
   id: PropTypes.string.isRequired,
 };
 
-export default YWAvatar;
+const YWAvatarWrapper = (props) => {
+  const { user } = props;
+  const passProps = _.clone(props);
+  delete passProps.user;
+
+  let id;
+  if (!user) {
+    id = 'deleted';
+  } else {
+    // eslint-disable-next-line prefer-destructuring
+    id = user.id;
+  }
+
+  return <YWAvatar id={id} />;
+};
+
+export default YWAvatarWrapper;
