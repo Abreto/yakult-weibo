@@ -73,11 +73,13 @@ module.exports = {
       }
     },
 
-    removeUser: async (_, { id }, { logger, model }) => {
+    removeUser: async (_, { id }, { logger, model, checkPermission }) => {
+      checkPermission('ADMIN');
+      if (id === undefined) return false;
+      if (id === null) return false;
+
       try {
-        if (id === undefined) return false;
-        if (id === null) return false;
-        const res = await model.user.remove({ id });
+        const res = await model.user.deleteOne({ _id: id });
         return (res.deletedCount > 0);
       } catch (e) {
         logger.warn(e);
