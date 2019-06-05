@@ -6,10 +6,11 @@ module.exports = {
   Query: {
     replies: async (_, { to }, { app, logger, model }) => {
       try {
-        const { ObjectId } = app.mongoose.Types;
+        // const { ObjectId } = app.mongoose.Types;
         return await model.reply.find({
-          to: ObjectId(to),
-        });
+          // to: ObjectId(to),
+          to,
+        }).sort('-createdAt');
       } catch (e) {
         logger.warn(e);
         return [];
