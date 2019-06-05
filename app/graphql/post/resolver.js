@@ -36,7 +36,7 @@ module.exports = {
 
     search: async (_, { contain }, { logger, model }) => {
       try {
-        return await model.post.find({ content: new RegExp(contain.replace(' ', '|'), 'iu') });
+        return await model.post.find({ content: new RegExp(contain.trim().replace(' ', '|'), 'iu') });
       } catch (e) {
         logger.warn(e);
         return [];
