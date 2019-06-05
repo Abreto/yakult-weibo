@@ -14,7 +14,6 @@ import { message, Affix } from 'antd';
 import { withApollo } from 'react-apollo';
 import { gql } from 'apollo-boost';
 
-import { AuthConsumer } from '../context/auth';
 import { MyAvatar } from './avatar';
 
 const POSTING = gql`
