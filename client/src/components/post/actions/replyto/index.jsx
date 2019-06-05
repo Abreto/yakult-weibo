@@ -36,7 +36,10 @@ const GET_REPLIES = gql`
 
 class ReplyTo extends React.Component {
   render() {
-    const { id } = this.props;
+    const {
+      id,
+      toggleRepliesPanel,
+    } = this.props;
     return (
       <Query
         query={GET_REPLIES}
@@ -49,7 +52,9 @@ class ReplyTo extends React.Component {
 
           const { replies } = data;
           return (
-            <ReplyToIcon num={replies.length} />
+            <span onClick={toggleRepliesPanel}>
+              <ReplyToIcon num={replies.length} />
+            </span>
           );
         }}
       </Query>

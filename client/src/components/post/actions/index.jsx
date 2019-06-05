@@ -15,8 +15,8 @@ import ReplyTo from './replyto';
 //   'Reply to'
 // ];
 
-export default (id, refetch) => ([
+export default (id, refetch, aboutReply) => ([
   <Favourite id={id} />,
   <Forward id={id} refetch={refetch} />,
-  <ReplyTo id={id} />,
+  <ReplyTo id={id} {...aboutReply} />,
 ]);

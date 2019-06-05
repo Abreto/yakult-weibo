@@ -72,7 +72,7 @@ const GET_REPLIES = gql`
     }
   }
 `;
-const RepliesPanel = ({ id }) => (
+const RepliesPanel = ({ id, show }) => (
   <Query
     query={GET_REPLIES}
     variables={{ to: id }}
@@ -83,7 +83,7 @@ const RepliesPanel = ({ id }) => (
       if (error) return <Alert variant="danger">Failed to load replies.</Alert>;
 
       const { replies } = data;
-      return <RepliesPanelPure dataSource={replies} />;
+      return <RepliesPanelPure show={show} dataSource={replies} />;
     }}
   </Query>
 );

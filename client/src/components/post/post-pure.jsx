@@ -9,28 +9,53 @@ import BindActions from './actions';
 import Avatar from '../avatar';
 import RepliesPanel from './replieszone';
 
-function PostPure({
-  id, poster, createdAt, content, originator, refetch,
-}) {
-  return (
-    <List.Item
-      key={id}
-      actions={BindActions(id, refetch)}
-      extra={originator ? `from ${originator.username}` : null}
-    >
-      <List.Item.Meta
-        avatar={<Avatar id={poster.id} />}
-        title={<span>{poster.username}</span>}
-        description={(
-          <Tooltip title={moment(parseInt(createdAt, 10)).format('YYYY-MM-DD HH:mm:ss')}>
-            <span>{moment(parseInt(createdAt, 10)).fromNow()}</span>
-          </Tooltip>
-        )}
-      />
-      <div>{content}</div>
-      <RepliesPanel id={id} />
-    </List.Item>
-  );
+class PostPure extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      repliesPanelVisible: false,
+    };
+  }
+
+  toggleRepliesPanel() {
+    this.setState((state) => {
+      const { repliesPanelVisible } = state;
+      return {
+        repliesPanelVisible: !repliesPanelVisible,
+      };
+    });
+  }
+
+  render() {
+    const {
+      id, poster, createdAt, content, originator, refetch,
+    } = this.props;
+    const {
+      repliesPanelVisible,
+    } = this.state;
+    return (
+      <List.Item
+        key={id}
+        actions={BindActions(id, refetch, {
+          toggleRepliesPanel: () => this.toggleRepliesPanel(),
+        })}
+        extra={originator ? `from ${originator.username}` : null}
+      >
+        <List.Item.Meta
+          avatar={<Avatar id={poster.id} />}
+          title={<span>{poster.username}</span>}
+          description={(
+            <Tooltip title={moment(parseInt(createdAt, 10)).format('YYYY-MM-DD HH:mm:ss')}>
+              <span>{moment(parseInt(createdAt, 10)).fromNow()}</span>
+            </Tooltip>
+          )}
+        />
+        <div>{content}</div>
+        <RepliesPanel id={id} show={repliesPanelVisible} />
+      </List.Item>
+    );
+  }
 }
 PostPure.propTypes = {
   id: PropTypes.string.isRequired,
