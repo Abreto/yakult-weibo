@@ -34,11 +34,27 @@ const GET_REPLIES = gql`
   }
 `;
 
+class RefetchSetter extends React.Component {
+  componentDidMount() {
+    const {
+      setRefreshReplyIcon,
+      refetch,
+    } = this.props;
+    console.log(refetch);
+    setRefreshReplyIcon(refetch);
+  }
+
+  render() {
+    return <span />;
+  }
+}
+
 class ReplyTo extends React.Component {
   render() {
     const {
       id,
       toggleRepliesPanel,
+      setRefreshReplyIcon,
     } = this.props;
     return (
       <Query
@@ -54,6 +70,10 @@ class ReplyTo extends React.Component {
           return (
             <span onClick={toggleRepliesPanel}>
               <ReplyToIcon num={replies.length} />
+              <RefetchSetter
+                setRefreshReplyIcon={setRefreshReplyIcon}
+                refetch={refetch}
+              />
             </span>
           );
         }}

@@ -15,7 +15,14 @@ class PostPure extends React.Component {
 
     this.state = {
       repliesPanelVisible: false,
+      refreshReplyIcon: () => {},
     };
+  }
+
+  setRefreshReplyIcon(refreshReplyIcon) {
+    this.setState({
+      refreshReplyIcon,
+    });
   }
 
   toggleRepliesPanel() {
@@ -33,12 +40,14 @@ class PostPure extends React.Component {
     } = this.props;
     const {
       repliesPanelVisible,
+      refreshReplyIcon,
     } = this.state;
     return (
       <List.Item
         key={id}
         actions={BindActions(id, refetch, {
           toggleRepliesPanel: () => this.toggleRepliesPanel(),
+          setRefreshReplyIcon: f => this.setRefreshReplyIcon(f),
         })}
         extra={originator ? `from ${originator.username}` : null}
       >
@@ -52,7 +61,11 @@ class PostPure extends React.Component {
           )}
         />
         <div>{content}</div>
-        <RepliesPanel id={id} show={repliesPanelVisible} />
+        <RepliesPanel
+          id={id}
+          show={repliesPanelVisible}
+          refreshReplyIcon={refreshReplyIcon}
+        />
       </List.Item>
     );
   }
