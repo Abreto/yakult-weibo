@@ -38,13 +38,20 @@ ListHeader.propTypes = {
   refetch: PropTypes.func.isRequired,
 };
 
-const PostsPureReally = ({ posts, showheader = true, refetch }) => (
+export const PostsPureReally = ({ posts, showheader = true, refetch, contentFilter }) => (
   <List
     bordered
     header={showheader ? <ListHeader refetch={refetch} /> : undefined}
     itemLayout="vertical"
     dataSource={posts}
-    renderItem={post => <Post key={post.id} id={post.id} refetch={refetch} />}
+    renderItem={post => (
+      <Post
+        key={post.id}
+        id={post.id}
+        refetch={refetch}
+        contentFilter={contentFilter}
+      />
+    )}
   />
 );
 

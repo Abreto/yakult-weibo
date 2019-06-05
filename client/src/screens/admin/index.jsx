@@ -15,9 +15,10 @@ import { AuthConsumer } from '../../context/auth';
 
 import SettingsPanel from './settings';
 import UserManagerPanel from './usermanager';
+import SearchPanel from './search';
 
 const RealAdminPanel = () => (
-  <Tab.Container id="personal-home-tabs" defaultActiveKey="#admin-tabs-settings">
+  <Tab.Container id="admin-panel-tabs" defaultActiveKey="#admin-tabs-search">
     <Row>
       <Col sm={9}>
         <Tab.Content>
@@ -26,6 +27,9 @@ const RealAdminPanel = () => (
           </Tab.Pane>
           <Tab.Pane eventKey="#admin-tabs-users">
             <UserManagerPanel />
+          </Tab.Pane>
+          <Tab.Pane eventKey="#admin-tabs-search">
+            <SearchPanel />
           </Tab.Pane>
         </Tab.Content>
       </Col>
@@ -38,6 +42,9 @@ const RealAdminPanel = () => (
               </Nav.Item>
               <Nav.Item>
                 <Nav.Link eventKey="#admin-tabs-users">Users Management</Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey="#admin-tabs-search">Search</Nav.Link>
               </Nav.Item>
             </Nav>
           </Affix>

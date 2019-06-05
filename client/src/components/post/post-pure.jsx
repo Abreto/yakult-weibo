@@ -37,7 +37,7 @@ class PostPure extends React.Component {
 
   render() {
     const {
-      id, poster, createdAt, content, originator, refetch,
+      id, poster, createdAt, content, originator, refetch, contentFilter,
     } = this.props;
     const {
       repliesPanelVisible,
@@ -76,7 +76,7 @@ class PostPure extends React.Component {
             </>
           )}
         />
-        <div>{content}</div>
+        <div>{(!contentFilter) ? content : contentFilter(content)}</div>
         <RepliesPanel
           id={id}
           show={repliesPanelVisible}
