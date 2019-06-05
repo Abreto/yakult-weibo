@@ -16,6 +16,16 @@ const GET_ALL_POSTS = gql`
     }
   }
 `;
+const GET_FAVOURITES_POSTS = gql`
+  query {
+    user {
+      id
+      favourites {
+        id
+      }
+    }
+  }
+`;
 
 const ListHeader = ({ refetch }) => (
   <AuthConsumer>
@@ -28,7 +38,44 @@ ListHeader.propTypes = {
   refetch: PropTypes.func.isRequired,
 };
 
-const PostsPure = ({ onlyFollowed }) => (
+const PostsPureReally = ({ posts, showheader = true, refetch }) => (
+  <List
+    bordered
+    header={showheader ? <ListHeader refetch={refetch} /> : undefined}
+    itemLayout="vertical"
+    dataSource={posts}
+    renderItem={post => <Post key={post.id} id={post.id} refetch={refetch} />}
+  />
+);
+
+const PostsPureOnlyFavourites = () => (
+  <Query
+    query={GET_FAVOURITES_POSTS}
+  >
+    {({
+      loading,
+      error,
+      data,
+      refetch,
+    }) => {
+      if (loading) return <Spin />;
+      if (error) {
+        return (
+          <p>
+            Failed to load favourites posts.
+          </p>
+        );
+      }
+
+      const { user: { favourites } } = data;
+      return (
+        <PostsPureReally posts={favourites} refetch={refetch} showheader={false} />
+      );
+    }}
+  </Query>
+);
+
+const PostsPureWithoutOnlyFavourites = ({ onlyFollowed }) => (
   <Query
     query={GET_ALL_POSTS}
     variables={{ onlyFollowed }}
@@ -55,13 +102,7 @@ const PostsPure = ({ onlyFollowed }) => (
 
       const { posts } = data;
       return (
-        <List
-          bordered
-          header={<ListHeader refetch={refetch} />}
-          itemLayout="vertical"
-          dataSource={posts}
-          renderItem={post => <Post key={post.id} id={post.id} refetch={refetch} />}
-        />
+        <PostsPureReally posts={posts} refetch={refetch} />
       );
     }}
   </Query>
@@ -70,13 +111,22 @@ PostsPure.propTypes = {
   onlyFollowed: PropTypes.bool.isRequired,
 };
 
+function PostsPure({ onlyFavourites, onlyFollowed }) {
+  if (onlyFavourites) {
+    return <PostsPureOnlyFavourites />;
+  }
+
+  return <PostsPureWithoutOnlyFavourites onlyFollowed={onlyFollowed} />;
+}
+
 class Posts extends React.Component {
   constructor(props) {
     super(props);
 
-    const { onlyFollowed } = this.props;
+    const { onlyFollowed, onlyFavourites } = this.props;
     this.state = {
       onlyFollowed,
+      onlyFavourites,
     };
   }
 
@@ -84,10 +134,10 @@ class Posts extends React.Component {
     return (
       <AuthConsumer>
         {({ user }) => {
-          if (!user) return <PostsPure onlyFollowed={false} />;
+          if (!user) return <PostsPure onlyFollowed={false} onlyFavourites={false} />;
 
-          const { onlyFollowed } = this.state;
-          return <PostsPure onlyFollowed={onlyFollowed} />;
+          const { onlyFollowed, onlyFavourites } = this.state;
+          return <PostsPure onlyFollowed={onlyFollowed} onlyFavourites={onlyFavourites} />;
         }}
       </AuthConsumer>
     );

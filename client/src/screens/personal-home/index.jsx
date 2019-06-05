@@ -21,7 +21,7 @@ const RealHome = () => (
             <Posts onlyFollowed />
           </Tab.Pane>
           <Tab.Pane eventKey="#personal-home-tabs-favourites">
-            <p />
+            <Posts onlyFavourites />
           </Tab.Pane>
         </Tab.Content>
       </Col>

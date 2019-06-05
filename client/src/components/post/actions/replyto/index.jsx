@@ -40,7 +40,7 @@ class RefetchSetter extends React.Component {
       setRefreshReplyIcon,
       refetch,
     } = this.props;
-    console.log(refetch);
+    // console.log(refetch);
     setRefreshReplyIcon(refetch);
   }
 
