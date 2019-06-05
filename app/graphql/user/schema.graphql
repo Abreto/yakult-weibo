@@ -11,6 +11,9 @@ type User {
   usertype: UserType!
   following: [User]!
   favourites: [Post]!
+
+  # Return null if he(she) never posts a tweet or errors occur
+  lastPostedAt: String
 }
 
 input UserRegisterForm {

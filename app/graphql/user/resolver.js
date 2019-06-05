@@ -183,5 +183,22 @@ module.exports = {
         return [];
       }
     },
+
+    lastPostedAt: async (parent, _, { logger, model }) => {
+      try {
+        const uid = parent.id;
+
+        const res = await model.post.find({
+          poster: uid,
+        }).sort('-createdAt').limit(1);
+
+        if (res.length === 0) return null;
+
+        return res[0].createdAt;
+      } catch (e) {
+        logger.warn(e);
+        return null;
+      }
+    },
   },
 };
