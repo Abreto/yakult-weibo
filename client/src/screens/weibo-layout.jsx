@@ -11,6 +11,7 @@ import './weibo-layout.css';
 import Posts from '../components/posts';
 
 import Home from './personal-home';
+import Admin from './admin';
 
 message.config({
   top: 60,
@@ -35,6 +36,7 @@ const WeiboLayout = () => (
           <Switch>
             <Route path="/home" component={Home} />
             <Route path="/profile" component={Profile} />
+            <Route path="/admin" component={Admin} />
             <Route component={Default} />
           </Switch>
         </Content>
