@@ -92,7 +92,7 @@ const FollowLayerWhenSignedIn = ({ id, show }) =>(
       if (loading) return <Spin />;
 
       const { isFollowing } = data;
-      const titleString = `${isFollowing ? 'Unl' : 'L'}ike him(her) ?`;
+      const titleString = `${isFollowing ? 'Disl' : 'L'}ike him(her) ${isFollowing ? 'now' : ''}?`;
       return (
         <PopoverItem
           titleStr={titleString}
