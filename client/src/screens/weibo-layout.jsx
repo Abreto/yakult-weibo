@@ -9,26 +9,19 @@ import NoticeAlert from '../components/notice-alert';
 
 import './weibo-layout.css';
 import Posts from '../components/posts';
-import { white } from 'ansi-colors';
+
+import Home from './personal-home';
 
 message.config({
   top: 60,
 });
-
-function Home() {
-  return <h1>Home</h1>;
-}
 
 function Profile() {
   return <h1>Profile</h1>;
 }
 
 function Default() {
-  return (
-    <>
-      <Posts />
-    </>
-  );
+  return <Posts />;
 }
 
 const { Content, Footer } = Layout;
