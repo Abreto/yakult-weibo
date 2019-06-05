@@ -131,7 +131,7 @@ const RepliesPanel = ({ id, show }) => (
   >
     {({ loading, error, data }) => {
       if (loading) return <Spin />;
-      if (error) return <Alert variant="danger">Failed to load replies.</Alert>;
+      if (error) return <Alert show={show} variant="danger">Failed to load replies.</Alert>;
 
       const { replies } = data;
       return <RepliesPanelPure id={id} show={show} dataSource={replies} />;
