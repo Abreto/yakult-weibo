@@ -7,6 +7,7 @@ import { List, Tooltip } from 'antd';
 
 import BindActions from './actions';
 import Avatar from '../avatar';
+import Username from '../username';
 import RepliesPanel from './replieszone';
 
 class PostPure extends React.Component {
@@ -42,6 +43,11 @@ class PostPure extends React.Component {
       repliesPanelVisible,
       refreshReplyIcon,
     } = this.state;
+
+    const titleComponent = (
+      <Username id={poster.id} username={poster.username} />
+    );
+
     return (
       <List.Item
         key={id}
@@ -49,15 +55,25 @@ class PostPure extends React.Component {
           toggleRepliesPanel: () => this.toggleRepliesPanel(),
           setRefreshReplyIcon: f => this.setRefreshReplyIcon(f),
         })}
-        extra={originator ? `from ${originator.username}` : null}
       >
         <List.Item.Meta
           avatar={<Avatar id={poster.id} />}
-          title={<span>{poster.username}</span>}
+          title={titleComponent}
           description={(
-            <Tooltip title={moment(parseInt(createdAt, 10)).format('YYYY-MM-DD HH:mm:ss')}>
-              <span>{moment(parseInt(createdAt, 10)).fromNow()}</span>
-            </Tooltip>
+            <>
+              <Tooltip title={moment(parseInt(createdAt, 10)).format('YYYY-MM-DD HH:mm:ss')}>
+                <span>{moment(parseInt(createdAt, 10)).fromNow()}</span>
+              </Tooltip>
+              {originator ? (
+                <span>
+                  {' ('}
+                  forwarded from
+                  {' '}
+                  <Username id={originator.id} username={originator.username} />
+                  {')'}
+                </span>
+              ) : null}
+            </>
           )}
         />
         <div>{content}</div>

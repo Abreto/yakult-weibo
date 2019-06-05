@@ -18,6 +18,7 @@ import {
   message,
 } from 'antd';
 
+import { AuthConsumer } from '../../context/auth';
 import Username from '../username';
 import Avatar from '../avatar';
 
@@ -86,7 +87,11 @@ class ReplyToFormPure extends React.Component {
             />
           </Form.Group>
           <Form.Group as={Col} xs="1">
-            <Button onClick={() => this.reply()}>Reply</Button>
+            <AuthConsumer>
+              {({ user }) => ((!user)
+                ? (<Button onClick={() => message.error('Please sign in first')}>Reply</Button>)
+                : (<Button onClick={() => this.reply()}>Reply</Button>))}
+            </AuthConsumer>
           </Form.Group>
         </Form.Row>
       </Form>
