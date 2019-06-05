@@ -27,7 +27,7 @@ const RealHome = () => (
       </Col>
       <Col sm={3}>
         <div>
-          <Affix offsetTop="64">
+          <Affix offsetTop={64}>
             <Nav variant="pills" className="flex-column">
               <Nav.Item>
                 <Nav.Link eventKey="#personal-home-tabs-followed">Followed</Nav.Link>

@@ -9,7 +9,7 @@ import {
   Form,
   Col,
 } from 'react-bootstrap';
-import { message } from 'antd';
+import { message, Affix } from 'antd';
 
 import { withApollo } from 'react-apollo';
 import { gql } from 'apollo-boost';
@@ -127,6 +127,48 @@ PostingModalPure.propTypes = {
 
 export const PostingModal = withApollo(PostingModalPure);
 
+class RealPostingBtn extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.prefixes = [
+      'outline-',
+      '',
+    ];
+    this.state = {
+      btnVar: 0,
+    };
+  }
+
+  render() {
+    const { onClick } = this.props;
+    const { btnVar } = this.state;
+
+    const btnVariantPrefix = this.prefixes[btnVar];
+    const btnVariant = `${btnVariantPrefix}primary`;
+
+    return (
+      <div>
+        <Affix
+          offsetTop={64}
+          onChange={affixed => this.setState({
+            btnVar: Number(affixed),
+          })}
+        >
+          <Button
+            variant={btnVariant}
+            size="lg"
+            block
+            onClick={onClick}
+          >
+            What&#39;s happening?
+          </Button>
+        </Affix>
+      </div>
+    );
+  }
+}
+
 export class PostingBtn extends React.Component {
   constructor(props) {
     super(props);
@@ -154,14 +196,7 @@ export class PostingBtn extends React.Component {
 
     return (
       <>
-        <Button
-          variant="outline-primary"
-          size="lg"
-          block
-          onClick={() => this.showPostingForm()}
-        >
-          What&#39;s happening?
-        </Button>
+        <RealPostingBtn onClick={() => this.showPostingForm()} />
         <PostingModal
           show={postingModalShow}
           onHide={() => this.closePostingForm()}

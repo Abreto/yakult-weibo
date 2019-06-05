@@ -14,6 +14,7 @@ import {
 import { AuthConsumer } from '../../context/auth';
 
 import SettingsPanel from './settings';
+import UserManagerPanel from './usermanager';
 
 const RealAdminPanel = () => (
   <Tab.Container id="personal-home-tabs" defaultActiveKey="#admin-tabs-settings">
@@ -24,13 +25,13 @@ const RealAdminPanel = () => (
             <SettingsPanel />
           </Tab.Pane>
           <Tab.Pane eventKey="#admin-tabs-users">
-            <p>users</p>
+            <UserManagerPanel />
           </Tab.Pane>
         </Tab.Content>
       </Col>
       <Col sm={3}>
         <div>
-          <Affix offsetTop="64">
+          <Affix offsetTop={64}>
             <Nav variant="pills" className="flex-column">
               <Nav.Item>
                 <Nav.Link eventKey="#admin-tabs-settings">Settings</Nav.Link>
