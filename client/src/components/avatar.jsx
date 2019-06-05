@@ -5,6 +5,7 @@ import _ from 'lodash';
 import gravatar from 'gravatar';
 
 import { Avatar } from 'antd';
+import { AuthConsumer } from '../context/auth';
 
 function url(child) {
   // https://www.npmjs.com/package/gravatar
@@ -51,3 +52,9 @@ const YWAvatarWrapper = (props) => {
 };
 
 export default YWAvatarWrapper;
+
+export const MyAvatar = () => (
+  <AuthConsumer>
+    {({ user }) => (<YWAvatarWrapper user={user} />)}
+  </AuthConsumer>
+);

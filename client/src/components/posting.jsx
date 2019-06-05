@@ -15,7 +15,7 @@ import { withApollo } from 'react-apollo';
 import { gql } from 'apollo-boost';
 
 import { AuthConsumer } from '../context/auth';
-import Avatar from './avatar';
+import { MyAvatar } from './avatar';
 
 const POSTING = gql`
   mutation Posting($content: String!) {
@@ -85,9 +85,7 @@ class PostingModalPure extends React.Component {
           <Form>
             <Form.Row>
               <Form.Group as={Col} xs="1">
-                <AuthConsumer>
-                  {({ user: { id } }) => (<Avatar id={id} />)}
-                </AuthConsumer>
+                <MyAvatar />
               </Form.Group>
 
               <Form.Group as={Col} xs>
