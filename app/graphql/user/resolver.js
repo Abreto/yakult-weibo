@@ -37,6 +37,12 @@ module.exports = {
         return false;
       }
     },
+
+    isFollowing: (_, { id }, { auth, checkPermission }) => {
+      checkPermission('MEMBER');
+
+      return auth.following.includes(id);
+    },
   },
 
   Mutation: {
