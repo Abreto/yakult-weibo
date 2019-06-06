@@ -123,7 +123,7 @@ class SearchModulePure extends React.Component {
 
   postSearch() {
     const { contain } = this.state;
-    const regexp = new RegExp(`(${contain.replace(' ', '|')})`, 'iug');
+    const regexp = new RegExp(`(${contain.trim().replace(' ', '|')})`, 'iug');
     this.setState({
       searching: false,
       searched: true,
